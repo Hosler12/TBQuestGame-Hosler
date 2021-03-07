@@ -24,6 +24,7 @@ namespace TBQuestGame_Hosler.DataLayer
                 Damage = 1,
                 Armor = 1,
                 HPLoss = 0,
+                ManaLoss = 0,
                 PermanentStrength = 1,
                 PermanentAgility = 1,
                 PermanentVitality = 1,

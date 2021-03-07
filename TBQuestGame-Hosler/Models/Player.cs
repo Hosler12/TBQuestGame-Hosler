@@ -24,6 +24,8 @@ namespace TBQuestGame_Hosler.Models
         private double _permanentagility;
         private double _permanentvitality;
         private double _permanentmagic;
+        private double _maxmana;
+        private double _manaloss;
 
         #endregion
 
@@ -94,9 +96,19 @@ namespace TBQuestGame_Hosler.Models
             get { return MaxHP - HPLoss; }
             set { _health = value; }
         }
-        public double Mana
+        public double ManaLoss
+        {
+            get { return _manaloss; }
+            set { _manaloss = value; }
+        }
+        public double MaxMana
         {
             get { return Magic * PermanentMagic * 10; }
+            set { _mana = value; }
+        }
+        public double Mana
+        {
+            get { return MaxMana - ManaLoss; }
             set { _mana = value; }
         }
 

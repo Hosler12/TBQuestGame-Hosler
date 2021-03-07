@@ -157,7 +157,7 @@
                             <StackPanel
                                 Orientation="Horizontal"
                                 HorizontalAlignment="Left">
-                                <TextBox Text="Health" Style="{StaticResource MainPanelTextBoxStyle}" IsReadOnly="True" />
+                                <TextBox Text="Mana" Style="{StaticResource MainPanelTextBoxStyle}" IsReadOnly="True" />
                                 <Label Content="Mana" Style="{StaticResource MainPanelLabelStyle}"/>
                             </StackPanel>
                             <StackPanel
