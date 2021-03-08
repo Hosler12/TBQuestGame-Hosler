@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace TBQuestGame_Hosler.Models
 {
-    public class Character
+    public class Character : ObservableObject
     {
         #region ENUMERABLES
 
@@ -38,31 +38,26 @@ namespace TBQuestGame_Hosler.Models
             get { return _id; }
             set { _id = value; }
         }
-
         public string Name
         {
             get { return _name; }
             set { _name = value; }
         }
-
         public int LocationId
         {
             get { return _locationId; }
             set { _locationId = value; }
         }
-
         public CombatType Combat
         {
             get { return _combat; }
             set { _combat = value; }
         }
-
         public int Tier
         {
             get { return _tier; }
             set { _tier = value; }
         }
-
         public int Level  // for npcs only
         {
             get { return _level; }

@@ -33,13 +33,102 @@ namespace TBQuestGame_Hosler.DataLayer
             };
         }
 
-        public static List<string> InitialMessages()
+        public static GameMapCoordinates InitialGameMapLocation()
         {
-            return new List<string>()
+            return new GameMapCoordinates() { Row = 0, Column = 0 };
+        }
+
+        public static Map GameMap()
+        {
+            int rows = 3;
+            int columns = 3;
+            //int floor = 1;
+
+            Map gameMap = new Map(rows, columns);
+
+            // floor one
+            //if (floor == 1)
+            //{
+            gameMap.MapLocations[0, 0] = new Location()
             {
-                //"\tYou wake up in an inn, and you can't remember much. There's one thing you do know though. You need to kill whatever is at the top of the ominous, black tower you see out your window."
-                "\tYou wake up on a stone floor. You have a feeling that the correct starting area has not been built yet."
+                Id = 1,
+                Name = "Entrance",
+                Description = "Tower Entrance",
+                Message = "An eerie silence deafens you as the door slides shut behind you. No easy way out now.",
             };
+            gameMap.MapLocations[0, 1] = new Location()
+            {
+                Id = 2,
+                Name = "Trap",
+                Description = "Sudden arrow",
+                Message = "You open the door, and an arrow embeds itself into your side. It hurts a lot, in case you were curious.",
+                ModifyHealth = 2,
+                ModifyAgility = 1
+            };
+            gameMap.MapLocations[0, 2] = new Location()
+            {
+                Id = 3,
+                Name = "Healing Mist",
+                Description = "A magical mist that closes wounds it touches.",
+                Message = "You open the door, and purple mist flows over you. It may heal your body, but it can't heal a wounded heart.",
+                ModifyHealth = -2,
+                ModifyVitality = 1
+            };
+            gameMap.MapLocations[1, 0] = new Location()
+            {
+                Id = 4,
+                Name = "Void",
+                Description = "Calm in the storm",
+                Message = "You enter a room with blank walls, floors, and doors. Just to be sure, you check the ceiling. Blank",
+                ModifyMagic = 1
+            };
+            gameMap.MapLocations[1, 1] = new Location()
+            {
+                Id = 5,
+                Name = "Blockade",
+                Description = "The doors have been blocked",
+                Message = "You need to push a lot to get this door open. Inside, you find furniture blocking the doors. Not for long.",
+                ModifyStrength = 1,
+
+            };
+            gameMap.MapLocations[1, 2] = new Location()
+            {
+                Id = 6,
+                Name = "Siphon",
+                Description = "Mana is drained in here",
+                Message = "You feel yourself lose energy. You decide that staying to find out what happened to it would probably be a bad idea.",
+                ModifyMana = 1,
+
+            };
+            gameMap.MapLocations[2, 0] = new Location()
+            {
+                Id = 7,
+                Name = "Trap",
+                Description = "Sudden arrow",
+                Message = "You open the door, and an arrow embeds itself into your kidney. That's why we have two",
+                ModifyHealth = 2,
+                ModifyAgility = 1
+            };
+            gameMap.MapLocations[2, 1] = new Location()
+            {
+                Id = 8,
+                Name = "Void",
+                Description = "Calm in the storm",
+                Message = "You enter a room with blank walls, floors, and doors. Just to be sure, you check the ceiling. Blank",
+                ModifyMagic = 1
+            };
+            gameMap.MapLocations[2, 2] = new Location()
+            {
+                Id = 9,
+                Name = "Stairs",
+                Description = "Level up, the tower",
+                Message = "You finally find the stairs, time to go up a level, of the tower.",
+                ModifyMagic = 1,
+                ModifyFloor = 1
+            };
+            //}
+
+            return gameMap;
         }
     }
 }

@@ -15,7 +15,6 @@ namespace TBQuestGame_Hosler.BusinessLayer
         bool _newPlayer = true;
         Player _player = new Player();
         PlayerSetupView _playerSetupView = null;
-        List<string> _messages;        
 
         public GameBusiness()
         {
@@ -42,8 +41,7 @@ namespace TBQuestGame_Hosler.BusinessLayer
         }
         private void InitializeDataSet()
         {
-            //_player = GameData.PlayerData();
-            _messages = GameData.InitialMessages();
+            _player = GameData.PlayerData();
         }
 
         /// <summary>
@@ -54,7 +52,10 @@ namespace TBQuestGame_Hosler.BusinessLayer
             //
             // instantiate the view model and initialize the data set
             //
-            _gameSessionViewModel = new GameSessionViewModel(_player, _messages);
+            _gameSessionViewModel = new GameSessionViewModel(_player,
+                GameData.GameMap(), 
+                GameData.InitialGameMapLocation());
+
             GameSessionView gameSessionView = new GameSessionView(_gameSessionViewModel);
 
             gameSessionView.DataContext = _gameSessionViewModel;

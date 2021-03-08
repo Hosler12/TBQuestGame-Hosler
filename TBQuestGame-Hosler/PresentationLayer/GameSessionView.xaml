@@ -28,7 +28,7 @@
         </Style>
         <Style x:Key="MainPanelButtonStyle" TargetType="Button">
             <Setter Property="Margin" Value="10,0,10,0"/>
-            <Setter Property="Width" Value="75"/>
+            <Setter Property="Width" Value="45"/>
             <Setter Property="Height" Value="20"/>
             <Setter Property="Background" Value="Silver"/>
             <Setter Property="Foreground" Value="MidnightBlue"/>
@@ -258,12 +258,7 @@
                                 Orientation="Horizontal"
                                 HorizontalAlignment="Right"
                                 VerticalAlignment="Bottom">
-                                <Button
-                                    Name="ExitButton"
-                                    Margin="0"
-                                    Content="Exit"
-                                    Style="{StaticResource MainPanelButtonStyle}"
-                                    Click="CloseButton_Click"/>
+                                
                             </StackPanel>
                         </StackPanel>
                     </Grid>
@@ -271,7 +266,7 @@
                 <Border
                     Grid.Row="0"
                     Grid.Column="1"
-                    Margin="10,0,10,10"
+                    Margin="10"
                     Style="{StaticResource BorderStyle}">
                     <Grid>
                         <StackPanel
@@ -286,17 +281,68 @@
                         </StackPanel>
                     </Grid>
                 </Border>
-                <Border
+                <Grid
+                    Margin="0"
                     Grid.Row="0"
-                    Grid.Column="2"
-                    Margin="0,0,0,10"
-                    Style="{StaticResource BorderStyle}">
-                    <Label 
-                        Content="Interactions"
-                        VerticalAlignment="Top"
-                        HorizontalAlignment="Center"
-                        Style="{StaticResource MainPanelLabelStyle}"/>
-                </Border>
+                    Grid.Column="2">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="*"/>
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+                    <Button
+                        Grid.Column="1"
+                        Grid.Row="0"
+                        Name="NorthButton"
+                        Margin="0"
+                        Content="North"
+                        Style="{StaticResource MainPanelButtonStyle}"
+                        Click="NorthTravelButton_Click"/>
+                    <Button
+                        Grid.Column="0"
+                        Grid.Row="1"
+                        Name="WestButton"
+                        Margin="0"
+                        Content="West"
+                        Style="{StaticResource MainPanelButtonStyle}"
+                        Click="WestTravelButton_Click"/>
+                    <TextBox
+                        Grid.Row="3" Grid.Column="0"
+                        Name="Location" IsReadOnly="True"
+                        Height="20" Margin="0" Width="30"
+                        Text="{Binding GameSessionViewModel.CurrentLocation}"
+                        Style="{StaticResource MainPanelTextBoxStyle}"/>
+                    <Button
+                        Grid.Column="2"
+                        Grid.Row="1"
+                        Name="EastButton"
+                        Margin="0"
+                        Content="East"
+                        Style="{StaticResource MainPanelButtonStyle}"
+                        Click="EastTravelButton_Click"/>
+                    <Button
+                        Grid.Column="1"
+                        Grid.Row="2"
+                        Name="SouthButton"
+                        Margin="0"
+                        Content="South"
+                        Style="{StaticResource MainPanelButtonStyle}"
+                        Click="SouthTravelButton_Click"/>
+                    <Button
+                        Grid.Column="1"
+                        Grid.Row="3"
+                        Name="ExitButton"
+                        Margin="0"
+                        Content="Exit"
+                        Style="{StaticResource MainPanelButtonStyle}"
+                        Click="CloseButton_Click"/>
+                </Grid>
                 <Border
                     Grid.Row="0"
                     Grid.Column="3"

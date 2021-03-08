@@ -40,5 +40,25 @@ namespace TBQuestGame_Hosler.PresentationLayer
         {
             this.Close();
         }
+
+        private void NorthTravelButton_Click(object sender, RoutedEventArgs e)
+        {
+            _gameSessionViewModel.MoveNorth();
+        }
+
+        private void EastTravelButton_Click(object sender, RoutedEventArgs e)
+        {
+            _gameSessionViewModel.MoveEast();
+        }
+
+        private void SouthTravelButton_Click(object sender, RoutedEventArgs e)
+        {
+            _gameSessionViewModel.MoveSouth();
+        }
+
+        private void WestTravelButton_Click(object sender, RoutedEventArgs e)
+        {
+            _gameSessionViewModel.MoveWest();
+        }
     }
 }
