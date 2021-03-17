@@ -233,6 +233,10 @@ namespace TBQuestGame_Hosler.PresentationLayer
                 _player.Magic += _currentLocation.ModifyMagic;
                 _player.Damage = _player.Strength * _player.PermanentStrength;
                 _player.Armor = _player.Agility * _player.PermanentAgility;
+                _player.MaxHP += _player.Vitality * _player.PermanentVitality * 10;
+                _player.Health = _player.MaxHP - _player.HPLoss;
+                _player.MaxMana = _player.Magic * _player.PermanentMagic * 10;
+                _player.Mana = _player.MaxMana - _player.ManaLoss;
 
                 // display a new message if available
                 //

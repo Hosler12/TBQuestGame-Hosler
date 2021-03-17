@@ -312,12 +312,6 @@
                         Content="West"
                         Style="{StaticResource MainPanelButtonStyle}"
                         Click="WestTravelButton_Click"/>
-                    <TextBox
-                        Grid.Row="3" Grid.Column="0"
-                        Name="Location" IsReadOnly="True"
-                        Height="20" Margin="0" Width="30"
-                        Text="{Binding GameSessionViewModel.CurrentLocation}"
-                        Style="{StaticResource MainPanelTextBoxStyle}"/>
                     <Button
                         Grid.Column="2"
                         Grid.Row="1"

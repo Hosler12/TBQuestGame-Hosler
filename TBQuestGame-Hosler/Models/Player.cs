@@ -111,10 +111,6 @@ namespace TBQuestGame_Hosler.Models
             set
             {
                 _maxhp = value;
-                OnPropertyChanged(nameof(Vitality));
-                OnPropertyChanged(nameof(MaxHP));
-                OnPropertyChanged(nameof(HPLoss));
-                OnPropertyChanged(nameof(Health));
             }
         }
         public double HPLoss
@@ -123,10 +119,6 @@ namespace TBQuestGame_Hosler.Models
             set
             {
                 _hploss = value;
-                OnPropertyChanged(nameof(HPLoss));
-                OnPropertyChanged(nameof(Vitality));
-                OnPropertyChanged(nameof(MaxHP));
-                OnPropertyChanged(nameof(Health));
             }
         }
         public double Health
@@ -154,10 +146,7 @@ namespace TBQuestGame_Hosler.Models
                     //_floor = 1;
                     _locationsVisited.Clear();
                 }
-                OnPropertyChanged(nameof(Vitality));
-                OnPropertyChanged(nameof(HPLoss));
                 OnPropertyChanged(nameof(Health));
-                OnPropertyChanged(nameof(MaxHP));
             }
         }
         public double ManaLoss
@@ -170,29 +159,18 @@ namespace TBQuestGame_Hosler.Models
                 {
                     _manaloss = MaxMana; // Likely also implemented in shop to prevent over purchasing
                 }
-                OnPropertyChanged(nameof(Magic));
-                OnPropertyChanged(nameof(MaxMana));
-                OnPropertyChanged(nameof(ManaLoss));
-                OnPropertyChanged(nameof(Mana));
             }
         }
         public double MaxMana
         {
             get { return Magic * PermanentMagic * 10; }
             set { _mana = value;
-                OnPropertyChanged(nameof(Magic));
-                OnPropertyChanged(nameof(MaxMana));
-                OnPropertyChanged(nameof(ManaLoss));
-                OnPropertyChanged(nameof(Mana));
             }
         }
         public double Mana
         {
             get { return MaxMana - ManaLoss; }
             set { _mana = value;
-                OnPropertyChanged(nameof(Magic));
-                OnPropertyChanged(nameof(MaxMana));
-                OnPropertyChanged(nameof(ManaLoss));
                 OnPropertyChanged(nameof(Mana));
             }
         }

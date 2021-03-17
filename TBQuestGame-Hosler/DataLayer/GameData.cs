@@ -42,7 +42,7 @@ namespace TBQuestGame_Hosler.DataLayer
         {
             int rows = 3;
             int columns = 3;
-            //int floor = 1;
+            int floor = 1;
 
             Map gameMap = new Map(rows, columns);
 
@@ -124,7 +124,7 @@ namespace TBQuestGame_Hosler.DataLayer
                 Description = "Level up, the tower",
                 Message = "You finally find the stairs, time to go up a level, of the tower.",
                 ModifyMagic = 1,
-                ModifyFloor = 1
+                floor = 2,
             };
             //}
 

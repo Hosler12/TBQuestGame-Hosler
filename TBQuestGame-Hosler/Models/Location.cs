@@ -84,6 +84,8 @@ namespace TBQuestGame_Hosler.Models
             get { return _modifyFloor; }
             set { _modifyFloor = value; }
         }
+
+        public int floor { get; internal set; }
         #endregion
     }
 }
