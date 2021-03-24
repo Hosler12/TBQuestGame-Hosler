@@ -1,8 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using TBQuestGame_Hosler.Models;
 
 namespace TBQuestGame_Hosler.Models
 {
@@ -26,6 +28,12 @@ namespace TBQuestGame_Hosler.Models
         private double _permanentmagic;
         private double _maxmana;
         private double _manaloss;
+        private ObservableCollection<GameItem> _inventory;
+        private ObservableCollection<GameItem> _weapons;
+        private ObservableCollection<GameItem> _armors;
+
+
+        private List<Location> _locationsVisited;
 
         #endregion
 
@@ -94,7 +102,38 @@ namespace TBQuestGame_Hosler.Models
         public double Health
         {
             get { return MaxHP - HPLoss; }
-            set { _health = value; }
+            set { 
+                _health = value;
+
+                //
+                // Resets locations when upon death
+                //
+
+                if (_health <= 0)
+                {
+                    HPLoss = 0;
+                    ManaLoss = 0;
+                    PermanentStrength += _strength * .1;
+                    PermanentAgility += _agility * .1;
+                    PermanentVitality += _vitality * .1;
+                    PermanentMagic += _magic * .1;
+                    Strength = 1;
+                    Agility = 1;
+                    Vitality = 1;
+                    Magic = 1;
+                    Damage = Strength * PermanentStrength;
+                    Armor = Agility * PermanentAgility;
+                    MaxHP += Vitality * PermanentVitality * 10;
+                    Health = MaxHP - HPLoss;
+                    MaxMana = Magic * PermanentMagic * 10;
+                    Mana = MaxMana - ManaLoss;
+                    _locationsVisited.Clear();
+                    Map._currentLocationCoordinates.Row = 0;
+                    Map._currentLocationCoordinates.Column = 0;
+                    Map._currentLocationCoordinates.Floor = 0;
+                }
+                OnPropertyChanged(nameof(Health));
+            }
         }
         public double ManaLoss
         {
@@ -109,14 +148,43 @@ namespace TBQuestGame_Hosler.Models
         public double Mana
         {
             get { return MaxMana - ManaLoss; }
-            set { _mana = value; }
+            set { _mana = value;
+                OnPropertyChanged(nameof(Mana));
+            }
+        }
+
+        public List<Location> LocationsVisited
+        {
+            get { return _locationsVisited; }
+            set { _locationsVisited = value;
+                OnPropertyChanged(nameof(LocationsVisited)); }
+        }
+        public ObservableCollection<GameItem> Inventory
+        {
+            get { return _inventory; }
+            set { _inventory = value; }
+        }
+        public ObservableCollection<GameItem> Weapons
+        {
+            get { return _weapons; }
+            set { _weapons = value; }
+        }
+        public ObservableCollection<GameItem> Armors
+        {
+            get { return _armors; }
+            set { _armors = value; }
         }
 
         #endregion
 
         #region CONSTRUCTORS
 
-
+        public Player()
+        {
+            _locationsVisited = new List<Location>();
+            _weapons = new ObservableCollection<GameItem>();
+            _armors = new ObservableCollection<GameItem>();
+        }
 
         #endregion
 
