@@ -103,7 +103,6 @@ namespace TBQuestGame_Hosler.Models
             }
         }
         // get the location if it exists
-        //
         public Location NorthLocation()
         {
             Location northLocation = null;

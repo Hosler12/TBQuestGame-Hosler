@@ -28,7 +28,7 @@
         </Style>
         <Style x:Key="MainPanelButtonStyle" TargetType="Button">
             <Setter Property="Margin" Value="10,0,10,0"/>
-            <Setter Property="Width" Value="75"/>
+            <Setter Property="Width" Value="45"/>
             <Setter Property="Height" Value="20"/>
             <Setter Property="Background" Value="Silver"/>
             <Setter Property="Foreground" Value="MidnightBlue"/>

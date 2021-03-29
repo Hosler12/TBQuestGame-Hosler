@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace TBQuestGame_Hosler.Models
 {
-    public class Character
+    public class Character : ObservableObject
     {
         #region ENUMERABLES
 

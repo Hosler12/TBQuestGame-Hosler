@@ -221,8 +221,21 @@ namespace TBQuestGame_Hosler.DataLayer
         {
             return new List<GameItem>()
             {
-                new Weapon(1000, "Fist", 0, 1, "Jab, Cross, Hook, Uppercut."),
-                new Armor(2000, "Clothes", 0, 1, "The clothes on your back"),
+                new Weapon(1000, "Fist", 1, "Jab, Cross, Hook, Uppercut."),
+                new Weapon(1001, "Dagger", 2, "Cheese not included"),
+                new Weapon(1002, "Club", 4, "Slightly sturdier stick."),
+                new Weapon(1003, "Great Club", 6, "You got suckered into buying a REALLY big stick"),
+                new Weapon(1004, "Short Spear", 5, "Spear is a generous term here."),
+                new Weapon(1005, "Spear", 10, "Spear is accurate here though"),
+                new Weapon(1006, "Glaive", 15, "You get a bonus shortsword with your spear!"),
+                new Weapon(1007, "Shortsword", 10, "A long dagger"),
+                new Weapon(1008, "Sword", 20, "The classic choice"),
+                new Weapon(1009, "Greatsword", 30, "I also call this a giant **** off sword"),
+                new Armor(2000, "Clothes", 1, "The clothes on your back"),
+                new Armor(2001, "Hide", 5, "That wasn't a command"),
+                new Armor(2002, "Chain", 15, "Because hauberks are expensive"),
+                new Armor(2003, "Scale", 10, "It'd be great if it weren't for all the gaps"),
+                new Armor(2004, "Plate", 30, "Pee flap included"),
             };
         }
     }

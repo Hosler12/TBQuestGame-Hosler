@@ -8,9 +8,9 @@ namespace TBQuestGame_Hosler.Models
 {
     public class Weapon : GameItem
     {
-        public int Bonus { get; set; }
-        public Weapon(int id, string name, int value, int bonus, string description)
-            : base(id, name, value, description)
+       //public int Bonus { get; set; }
+        public Weapon(int id, string name, int bonus, string description)
+            : base(id, name, bonus, description)
         {
             Bonus = bonus;
         }

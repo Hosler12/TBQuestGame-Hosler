@@ -13,7 +13,7 @@ namespace TBQuestGame_Hosler.Models
         //
         public int Id { get; set; }
         public string Name { get; set; }
-        public int Value { get; set; }
+        public int Bonus { get; set; }
         public string Description { get; set; }
         public string UseMessage { get; set; }
 
@@ -25,18 +25,18 @@ namespace TBQuestGame_Hosler.Models
             }
         }
 
-        public GameItem(int id, string name, int value, string description, string useMessage = "")
+        public GameItem(int id, string name, int bonus, string description, string useMessage = "")
         {
             Id = id;
             Name = name;
-            Value = value;
+            Bonus = bonus;
             Description = description;
             UseMessage = useMessage;
         }
 
         public virtual string InformationString()
         {
-            return $"{Name}: {Description}/nValue: {Value}";
+            return $"{Name}: {Description}/nValue: {Bonus}";
         }
     }
 }
