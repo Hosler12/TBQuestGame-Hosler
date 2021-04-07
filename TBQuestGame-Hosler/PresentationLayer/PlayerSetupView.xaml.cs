@@ -33,9 +33,7 @@ namespace TBQuestGame_Hosler.PresentationLayer
 
         private void SetupWindow()
         {
-            //
-            // generate lists for each enum to use in the combo boxes
-            //
+
         }
 
         private void OkButton_Click(object sender, RoutedEventArgs e)

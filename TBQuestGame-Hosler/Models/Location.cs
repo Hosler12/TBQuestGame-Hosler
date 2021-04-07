@@ -25,6 +25,7 @@ namespace TBQuestGame_Hosler.Models
         private int _modifyVitality;
         private int _modifyMagic;
         private ObservableCollection<GameItem> _gameItems;
+        private ObservableCollection<Npc> _npcs;
 
         #endregion
 
@@ -85,6 +86,11 @@ namespace TBQuestGame_Hosler.Models
         {
             get { return _gameItems; }
             set { _gameItems = value; }
+        }
+        public ObservableCollection<Npc> Npcs
+        {
+            get { return _npcs; }
+            set { _npcs = value; }
         }
         #endregion
 

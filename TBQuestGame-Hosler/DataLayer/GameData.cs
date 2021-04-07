@@ -21,7 +21,6 @@ namespace TBQuestGame_Hosler.DataLayer
                 Vitality = 1,
                 Magic = 1,
                 LocationId = 0,
-                Tier = 0,
                 Damage = 1,
                 Armor = 1,
                 HPLoss = 0,
@@ -38,11 +37,14 @@ namespace TBQuestGame_Hosler.DataLayer
             };
         }
 
-        private static GameItem GameItemById(int id)
+        public static GameItem GameItemById(int id)
         {
             return StandardGameItems().FirstOrDefault(i => i.Id == id);
         }
-
+        private static Npc NpcById(int id)
+        {
+            return Npcs().FirstOrDefault(i => i.Id == id);
+        }
         public static GameMapCoordinates InitialGameMapLocation()
         {
             return new GameMapCoordinates() { Row = 0, Column = 0, Floor = 0 };
@@ -183,10 +185,12 @@ namespace TBQuestGame_Hosler.DataLayer
             {
                 Id = 160,
                 Name = "Fight",
-                Description = "Insert generic enemy here later",
-                Message = "You feel like the dev didn't add the enemy here like he was supposed to. In fact, this message was copy pasted! Have some damage, on the house.",
-                ModifyHealth = 50,
-
+                Description = "Enemy",
+                Message = "You see a monster that looks so bland you want to put it out of your misery.",
+                Npcs = new ObservableCollection<Npc>
+                {
+                    NpcById(1001)
+                },
             };
             gameMap.MapLocations[2, 0, 1] = new Location()
             {
@@ -216,7 +220,6 @@ namespace TBQuestGame_Hosler.DataLayer
             };
             return gameMap;
         }
-
         public static List<GameItem> StandardGameItems()
         {
             return new List<GameItem>()
@@ -234,10 +237,26 @@ namespace TBQuestGame_Hosler.DataLayer
                 new Armor(2000, "Clothes", 1, "The clothes on your back"),
                 new Armor(2001, "Hide", 5, "That wasn't a command"),
                 new Armor(2002, "Chain", 15, "Because hauberks are expensive"),
-                new Armor(2003, "Scale", 10, "It'd be great if it weren't for all the gaps"),
+                new Armor(2003, "Scale", 10, "No I didn't mean scale mail, that would be wrong."),
                 new Armor(2004, "Plate", 30, "Pee flap included"),
+            };
+        }
+        public static List<Npc> Npcs()
+        {
+            return new List<Npc>()
+            {
+                new Minion()
+                {
+                    Id = 1001,
+                    Name = "Lieutenant Obvious",
+                    Description = "A being that looks so generic you're forgetting what it looks like while looking at it.",
+                    Messages = new List<string>()
+                    {
+                        "Minions unite! Or not."
+                    },
+                    SkillLevel = 2,
+                },
             };
         }
     }
 }
-//You feel like the dev didn't add the enemy here like he was supposed to. In fact, this message was copy pasted! Have some damage, on the house

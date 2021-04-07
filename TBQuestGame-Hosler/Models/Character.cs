@@ -26,8 +26,8 @@ namespace TBQuestGame_Hosler.Models
         protected string _name;
         protected int _locationId;
         protected CombatType _combat;
-        protected int _tier;
         protected int _level;
+        protected string _description;
 
         #endregion
 
@@ -57,18 +57,16 @@ namespace TBQuestGame_Hosler.Models
             set { _combat = value; }
         }
 
-        public int Tier
-        {
-            get { return _tier; }
-            set { _tier = value; }
-        }
-
         public int Level  // for npcs only
         {
             get { return _level; }
             set { _level = value; }
         }
-
+        public string Description
+        {
+            get { return _description; }
+            set { _description = value; }
+        }
         #endregion
 
         #region CONSTRUCTORS
@@ -78,12 +76,11 @@ namespace TBQuestGame_Hosler.Models
 
         }
 
-        public Character(string name, CombatType combat, int locationId, int tier) 
+        public Character(int id, string name, string description) 
         {
             _name = name;
-            _combat = combat;
-            _locationId = locationId;
-            _tier = tier;
+            _id = id;
+            _description = description;
         }
         
         #endregion
@@ -92,7 +89,7 @@ namespace TBQuestGame_Hosler.Models
 
         public virtual string DefaultGreeting()
         {
-            return $"Hello, my name is {_name} and I use tier {_tier} {_combat} equipment.";
+            return $"Hello, my name is {_name} and I use level {_level} {_combat} equipment.";
         }
 
         #endregion
