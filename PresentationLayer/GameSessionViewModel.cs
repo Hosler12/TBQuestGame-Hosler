@@ -6,8 +6,6 @@ using System.Threading.Tasks;
 using TBQuestGame_Hosler;
 using TBQuestGame_Hosler.Models;
 using System.Windows.Threading;
-using System.Windows;
-using TBQuestGame_Hosler.DataLayer;
 
 namespace TBQuestGame_Hosler.PresentationLayer
 {
@@ -22,16 +20,14 @@ namespace TBQuestGame_Hosler.PresentationLayer
 
         private Map _gameMap;
         private Location _currentLocation;
-        private string _currentLocationInformation;
         private Location _northLocation, _eastLocation, _southLocation, _westLocation, _upLocation;
-        private Random random = new Random();
 
         private GameItem _currentGameItem;
-        private Npc _npcs;
 
         #endregion
 
         #region PROPERTIES
+
         public Player Player
         {
             get { return _player; }
@@ -52,20 +48,10 @@ namespace TBQuestGame_Hosler.PresentationLayer
             set
             {
                 _currentLocation = value;
-                _currentLocationInformation = _currentLocation.Description;
                 OnPropertyChanged(nameof(CurrentLocation));
-                OnPropertyChanged(nameof(CurrentLocationInformation));
             }
         }
-        public string CurrentLocationInformation
-        {
-            get { return _currentLocationInformation; }
-            set
-            {
-                _currentLocationInformation = value;
-                OnPropertyChanged(nameof(CurrentLocationInformation));
-            }
-        }
+
         // expose information about travel points from current location
         public Location NorthLocation
         {
@@ -132,23 +118,15 @@ namespace TBQuestGame_Hosler.PresentationLayer
                 OnPropertyChanged(nameof(MissionTimeDisplay));
             }
         }
+
         public GameItem CurrentGameItem
         {
             get { return _currentGameItem; }
             set { _currentGameItem = value; }
         }
-        public Npc CurrentNpc
-        {
-            get { return _npcs; }
-            set
-            {
-                _npcs = value;
-                OnPropertyChanged(nameof(CurrentLocation));
-                OnPropertyChanged(nameof(CurrentNpc));
-            }
-        }
+
         #endregion
-        
+
         #region CONSTRUCTORS
 
         public GameSessionViewModel()
@@ -162,7 +140,7 @@ namespace TBQuestGame_Hosler.PresentationLayer
             GameMapCoordinates currentLocationCoordinates)
         {
             _player = player;
-            
+
             _gameMap = gameMap;
             _gameMap.CurrentLocationCoordinates = currentLocationCoordinates;
             _currentLocation = _gameMap.CurrentLocation;
@@ -189,10 +167,12 @@ namespace TBQuestGame_Hosler.PresentationLayer
         private void InitializeView()
         {
             _gameStartTime = DateTime.Now;
-            _currentLocationInformation = CurrentLocation.Description;
             UpdateAvailableTravelPoints();
         }
-        // Calculate available travel points
+
+        /// <summary>
+        /// Calculate available travel points
+        /// </summary>
         private void UpdateAvailableTravelPoints()
         {
             //
@@ -233,6 +213,7 @@ namespace TBQuestGame_Hosler.PresentationLayer
                 UpLocation = nextUpLocation;
             }
         }
+
         /// <summary>
         /// player move event handler
         /// </summary>
@@ -268,8 +249,6 @@ namespace TBQuestGame_Hosler.PresentationLayer
                 _player.Damage = _player.Strength * _player.PermanentStrength;
                 _player.Armor = _player.Agility * _player.PermanentAgility;
                 _player.MaxMana = _player.Magic * _player.PermanentMagic * 10;
-                if (_player.ManaLoss < 0)
-                { _player.ManaLoss = 0; }
                 _player.Mana = _player.MaxMana - _player.ManaLoss;
                 if ( _player.Mana < 0 )
                 {
@@ -282,11 +261,12 @@ namespace TBQuestGame_Hosler.PresentationLayer
                 
                 // display a new message if available
                 OnPropertyChanged(nameof(MessageDisplay));
-                CurrentLocationInformation += Environment.NewLine + "Weapon: " + _player.Inventory[0].Name + " Description: " + _player.Inventory[0].Description;
-                CurrentLocationInformation += Environment.NewLine + "Armor: " + _player.Inventory[1].Name + " Description: " + _player.Inventory[1].Description;
             }
         }
-        // travel in direction
+
+        /// <summary>
+        /// travel in direction
+        /// </summary>
         public void MoveNorth()
         {
             if (HasNorthLocation)
@@ -337,44 +317,11 @@ namespace TBQuestGame_Hosler.PresentationLayer
                 OnPlayerMove();
             }
         }
-        internal void ArmorUp()
-        {
-            int newArmor = _player.Inventory[1].Id + 1;
-            CurrentLocationInformation = newArmor.ToString();
-            _player.Inventory.Add(GameData.GameItemById(newArmor));
-            if (_player.Inventory[2].Bonus * 2 <= _player.Mana)
-            {
-                _player.Inventory[1] = _player.Inventory[2];
-                CurrentLocationInformation = "You conjure a new armor successfully, and decide that wearing two armors would look dumb. Basic fasion.";
-                _player.Armor = _player.Inventory[1].Bonus * _player.Agility * _player.PermanentAgility;
-                _player.ManaLoss += _player.Inventory[1].Bonus * 2;
-                _player.Mana = _player.MaxMana - _player.ManaLoss;
-            }
-            else
-            {
-                CurrentLocationInformation = "You try to conjure some new armor, but find your mana pool is lacking. Too bad you don't know how to block.";
-            }
-            _player.Inventory.RemoveAt(2);
-        }
-        internal void WeaponUp()
-        {
-            int newWeapon = _player.Inventory[0].Id + 1;
-            CurrentLocationInformation = newWeapon.ToString();
-            _player.Inventory.Add(GameData.GameItemById(newWeapon));
-            if (_player.Inventory[2].Bonus <= _player.Mana)
-            {
-                _player.Inventory[0] = _player.Inventory[2];
-                CurrentLocationInformation = "You conjure a new weapon successfully, and throw away the old one because you definitely won't need that later.";
-                _player.Damage = _player.Inventory[0].Bonus * _player.Strength * _player.PermanentStrength;
-                _player.ManaLoss += _player.Inventory[0].Bonus;
-                _player.Mana = _player.MaxMana - _player.ManaLoss;
-            }
-            else
-            {
-                CurrentLocationInformation = "You try to conjure a new weapon, but find your mana pool is lacking. Time to hit stuff more.";
-            }
-            _player.Inventory.RemoveAt(2);
-        }
+
+        #endregion
+
+        #region METHODS
+
         /// <summary>
         /// running time of game
         /// </summary>
@@ -383,6 +330,7 @@ namespace TBQuestGame_Hosler.PresentationLayer
         {
             return DateTime.Now - _gameStartTime;
         }
+
         /// <summary>
         /// game timer event handler
         /// 1) update mission time on window
@@ -394,106 +342,12 @@ namespace TBQuestGame_Hosler.PresentationLayer
             _gameTime = DateTime.Now - _gameStartTime;
             MissionTimeDisplay = "Mission Time " + _gameTime.ToString(@"hh\:mm\:ss");
         }
+
         public void ExitApplication()
         {
             Environment.Exit(0);
         }
-        public void OnPlayerTalkTo()
-        {
-            if (_currentLocation.Npcs[0] != null && _currentLocation.Npcs[0] is ISpeak)
-            {
-                ISpeak speakingNpc = _currentLocation.Npcs[0] as ISpeak;
-                CurrentLocationInformation = speakingNpc.Speak();
-            }
-        }
-        /// <summary>
-        /// handle the attack event in the view.
-        /// </summary>
-        public void OnPlayerAttack()
-        {
-            _player.BattleMode = BattleModeName.ATTACK;
-            Battle();
-        }
-        /// <summary>
-        /// handle the cast event in the view.
-        /// </summary>
-        public void OnPlayerCast()
-        {
-            _player.BattleMode = BattleModeName.CAST;
-            Battle();
-        }
-        private void Battle()
-        {
-            string battleInformation = "";
 
-            //
-            // check to see if an NPC can battle
-            //
-            if (_currentLocation.Npcs != null && _currentLocation.Npcs.ElementAtOrDefault(0) != null)
-            {
-                if (_currentLocation.Npcs[0] is IBattle)
-                {
-                    IBattle battleNpc = _currentLocation.Npcs[0] as IBattle;
-                    double eDamageReceived = 0;
-                    if (_player.BattleMode == BattleModeName.ATTACK)
-                    {
-                        eDamageReceived = _player.Attack();
-                    }
-                    else if (_player.BattleMode == BattleModeName.CAST)
-                    {
-                        eDamageReceived = _player.Cast();
-                    }
-                    double pDamageReceived = 0;
-                    switch (DieRoll(2))
-                    {
-                        case 1:
-                            battleNpc.BattleMode = BattleModeName.ATTACK;
-                            if (battleNpc.Attack() < _player.Armor)
-                            {
-                                pDamageReceived = battleNpc.Attack();
-                                _player.Agility += 1;
-                                _player.Armor = _player.Agility * _player.PermanentAgility * _player.Inventory[1].Bonus;
-                            }
-                            break;
-                        case 2:
-                            battleNpc.BattleMode = BattleModeName.CAST;
-                            pDamageReceived = battleNpc.Cast();
-                            break;
-                    }
-                    _player.HPLoss += pDamageReceived;
-                    _player.MaxHP = _player.Vitality * _player.PermanentVitality * 10;
-                    _player.Health = _player.MaxHP - _player.HPLoss;
-                    if (eDamageReceived >= battleNpc.SkillLevel * 10)
-                    {
-                        battleInformation += $"You have slain {_currentLocation.Npcs[0].Name}. " + Environment.NewLine;
-                        _currentLocation.Npcs.Remove(_currentLocation.Npcs[0]);
-                    }
-                    else
-                    {
-                        battleInformation += "You stare in dismay as the tower heals the enemy's wounds." + Environment.NewLine;
-                    }
-                    if (_player.Health <= 0)
-                    {
-                        battleInformation += $"You have been slain by {_currentLocation.Npcs[0].Name}.";
-                    }
-
-                    // build out the text for the current location information
-                    battleInformation +=
-                        $"Player: {_player.BattleMode}     Hit Points: {_player.Health}" + Environment.NewLine +
-                        $"NPC: {battleNpc.BattleMode}     Hit Points: {battleNpc.SkillLevel * 10}" + Environment.NewLine;
-
-                }
-                CurrentLocationInformation = battleInformation;
-            }
-        }
-        #endregion
-
-        #region HELPER METHODS
-
-        private int DieRoll(int sides)
-        {
-            return random.Next(1, sides + 1);
-        }
         #endregion
     }
 }

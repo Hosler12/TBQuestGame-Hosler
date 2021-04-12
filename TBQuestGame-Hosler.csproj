@@ -37,8 +37,6 @@
   <ItemGroup>
     <Reference Include="System" />
     <Reference Include="System.Data" />
-    <Reference Include="System.Drawing" />
-    <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml" />
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Core" />
@@ -66,16 +64,11 @@
     <Compile Include="BusinessLayer\GameBusiness.cs" />
     <Compile Include="DataLayer\GameData.cs" />
     <Compile Include="Models\Armor.cs" />
-    <Compile Include="Models\BattleModeEnum.cs" />
     <Compile Include="Models\GameItem.cs" />
     <Compile Include="Models\GameMapLocation.cs" />
-    <Compile Include="Models\IBattle.cs" />
-    <Compile Include="Models\ISpeak.cs" />
     <Compile Include="Models\Location.cs" />
     <Compile Include="Models\Character.cs" />
     <Compile Include="Models\Map.cs" />
-    <Compile Include="Models\Minion.cs" />
-    <Compile Include="Models\Npc.cs" />
     <Compile Include="Models\Player.cs" />
     <Compile Include="Models\Weapon.cs" />
     <Compile Include="ObservableObject.cs" />

@@ -28,7 +28,7 @@
         </Style>
         <Style x:Key="MainPanelButtonStyle" TargetType="Button">
             <Setter Property="Margin" Value="10,0,10,0"/>
-            <Setter Property="Width" Value="50"/>
+            <Setter Property="Width" Value="45"/>
             <Setter Property="Height" Value="20"/>
             <Setter Property="Background" Value="Silver"/>
             <Setter Property="Foreground" Value="MidnightBlue"/>
@@ -100,7 +100,6 @@
                 Margin="10">
                 <Grid.RowDefinitions>
                     <RowDefinition Height="3*"/>
-                    <RowDefinition Height="1*"/>
                     <RowDefinition Height="1*"/>
                 </Grid.RowDefinitions>
                 <Grid.ColumnDefinitions>
@@ -306,14 +305,6 @@
                         <ColumnDefinition Width="*"/>
                     </Grid.ColumnDefinitions>
                     <Button
-                        Grid.Column="0"
-                        Grid.Row="0"
-                        Name="AttackButton"
-                        Margin="0"
-                        Content="Attack"
-                        Style="{StaticResource MainPanelButtonStyle}"
-                        Click="AttackButton_Click"/>
-                    <Button
                         Grid.Column="1"
                         Grid.Row="0"
                         Name="NorthButton"
@@ -321,14 +312,6 @@
                         Content="North"
                         Style="{StaticResource MainPanelButtonStyle}"
                         Click="NorthTravelButton_Click"/>
-                    <Button
-                        Grid.Column="2"
-                        Grid.Row="0"
-                        Name="CastButton"
-                        Margin="0"
-                        Content="Cast"
-                        Style="{StaticResource MainPanelButtonStyle}"
-                        Click="CastButton_Click"/>
                     <Button
                         Grid.Column="0"
                         Grid.Row="1"
@@ -354,14 +337,6 @@
                         Style="{StaticResource MainPanelButtonStyle}"
                         Click="EastTravelButton_Click"/>
                     <Button
-                        Grid.Column="0"
-                        Grid.Row="2"
-                        Name="WeaponUpButton"
-                        Margin="0"
-                        Content="Weapon"
-                        Style="{StaticResource MainPanelButtonStyle}"
-                        Click="Weapon_Click"/>
-                    <Button
                         Grid.Column="1"
                         Grid.Row="2"
                         Name="SouthButton"
@@ -369,14 +344,6 @@
                         Content="South"
                         Style="{StaticResource MainPanelButtonStyle}"
                         Click="SouthTravelButton_Click"/>
-                    <Button
-                        Grid.Column="2"
-                        Grid.Row="2"
-                        Name="ArmorUpButton"
-                        Margin="0"
-                        Content="Armor"
-                        Style="{StaticResource MainPanelButtonStyle}"
-                        Click="Armor_Click"/>
                     <Button
                         Grid.Column="1"
                         Grid.Row="3"
@@ -392,7 +359,7 @@
                     Margin="0,0,0,10"
                     Style="{StaticResource BorderStyle}">
                     <Label 
-                        Content="Story"
+                        Content="Goals"
                         VerticalAlignment="Top"
                         HorizontalAlignment="Center"
                         Style="{StaticResource MainPanelLabelStyle}"/>
@@ -414,52 +381,6 @@
                                 BorderThickness="0"
                                 TextWrapping="Wrap"
                                 Text="{Binding MessageDisplay, Mode=OneWay}"
-                                VerticalScrollBarVisibility="Auto"
-                                VerticalContentAlignment="top"
-                                Style="{StaticResource MainPanelTextBoxStyle}" IsReadOnly="True" />
-                    </Border>
-                </Border>
-                <Border
-                    Grid.Row="2"
-                    Grid.Column="0"
-                    Grid.ColumnSpan="2"
-                    Style="{StaticResource BorderStyle}">
-                    <Border
-                            Margin="0"
-                            Padding="0"
-                            Background="WhiteSmoke"
-                            Style="{StaticResource BorderStyle}">
-                        <TextBox
-                                Height="auto"
-                                Width="auto"
-                                Margin="10"
-                                Background="WhiteSmoke"
-                                BorderThickness="0"
-                                TextWrapping="Wrap"
-                                Text="{Binding CurrentLocationInformation, Mode=OneWay}"
-                                VerticalScrollBarVisibility="Auto"
-                                VerticalContentAlignment="top"
-                                Style="{StaticResource MainPanelTextBoxStyle}" IsReadOnly="True" />
-                    </Border>
-                </Border>
-                <Border
-                    Grid.Row="2"
-                    Grid.Column="2"
-                    Grid.ColumnSpan="2"
-                    Style="{StaticResource BorderStyle}">
-                    <Border
-                            Margin="0"
-                            Padding="0"
-                            Background="WhiteSmoke"
-                            Style="{StaticResource BorderStyle}">
-                        <TextBox
-                                Height="auto"
-                                Width="auto"
-                                Margin="10"
-                                Background="WhiteSmoke"
-                                BorderThickness="0"
-                                TextWrapping="Wrap"
-                                Text="{Binding CurrentLocation.Npcs[0].Name, Mode=OneWay}"
                                 VerticalScrollBarVisibility="Auto"
                                 VerticalContentAlignment="top"
                                 Style="{StaticResource MainPanelTextBoxStyle}" IsReadOnly="True" />

@@ -4,12 +4,11 @@ using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using TBQuestGame_Hosler.DataLayer;
 using TBQuestGame_Hosler.Models;
 
 namespace TBQuestGame_Hosler.Models
 {
-    public class Player : Character, IBattle
+    public class Player : Character
     {
         #region Variables
 
@@ -29,9 +28,6 @@ namespace TBQuestGame_Hosler.Models
         private double _permanentmagic;
         private double _maxmana;
         private double _manaloss;
-        private int _skillLevel;
-        private Weapon _currentWeapon;
-        private BattleModeName _battleMode;
         private ObservableCollection<GameItem> _inventory;
         private ObservableCollection<GameItem> _weapons;
         private ObservableCollection<GameItem> _armors;
@@ -71,6 +67,22 @@ namespace TBQuestGame_Hosler.Models
                 OnPropertyChanged(nameof(Magic));
             }
         } 
+        public double Damage
+        {
+            get { return _damage; }
+            set { _damage = value;
+                OnPropertyChanged(nameof(Strength));
+                OnPropertyChanged(nameof(Damage));
+            }
+        }
+        public double Armor
+        {
+            get { return _armor; }
+            set { _armor = value;
+                OnPropertyChanged(nameof(Agility));
+                OnPropertyChanged(nameof(Armor));
+            }
+        }
         public double HPLoss
         {
             get { return _hploss; }
@@ -119,7 +131,9 @@ namespace TBQuestGame_Hosler.Models
             set { 
                 _health = value;
 
-                // Resets things when upon death
+                //
+                // Resets locations when upon death
+                //
 
                 if (_health <= 0)
                 {
@@ -139,12 +153,10 @@ namespace TBQuestGame_Hosler.Models
                     Health = MaxHP - HPLoss;
                     MaxMana = Magic * PermanentMagic * 10;
                     Mana = MaxMana - ManaLoss;
-                    LocationsVisited.Clear();
+                    _locationsVisited.Clear();
                     Map._currentLocationCoordinates.Row = 0;
                     Map._currentLocationCoordinates.Column = 0;
                     Map._currentLocationCoordinates.Floor = 0;
-                    Inventory[0] = GameData.GameItemById(1000);
-                    Inventory[1] = GameData.GameItemById(2000);
                 }
                 OnPropertyChanged(nameof(Health));
             }
@@ -170,40 +182,7 @@ namespace TBQuestGame_Hosler.Models
                 OnPropertyChanged(nameof(Mana));
             }
         }
-        public double Armor
-        {
-            get { return Agility * PermanentAgility * Inventory[1].Bonus; }
-            set
-            {
-                _armor = value;
-                OnPropertyChanged(nameof(Armor));
-            }
-        }
-        public double Damage
-        {
-            get { return Strength * PermanentStrength * Inventory[0].Bonus; }
-            set
-            {
-                _damage = value;
-                OnPropertyChanged(nameof(Damage));
-            }
-        }
-        public int SkillLevel
-        {
-            get { return _skillLevel; }
-            set { _skillLevel = value; }
-        }
-        public Weapon CurrentWeapon
-        {
-            get { return _currentWeapon; }
-            set { _currentWeapon = value; }
-        }
 
-        public BattleModeName BattleMode
-        {
-            get { return _battleMode; }
-            set { _battleMode = value; }
-        }
         public List<Location> LocationsVisited
         {
             get { return _locationsVisited; }
@@ -243,34 +222,6 @@ namespace TBQuestGame_Hosler.Models
         public bool HasVisited(Location location)
         {
             return _locationsVisited.Contains(location);
-        }
-
-        #endregion
-
-        #region BATTLE METHODS
-
-        /// <summary>
-        /// return damage based weapon and strength
-        /// </summary>
-        public double Attack()
-        {
-            double tempDamage = Damage;
-            Strength += 1;
-            Damage = Strength * PermanentStrength * Inventory[0].Bonus;
-            return tempDamage;
-        }
-
-        /// <summary>
-        /// return damage based on magic and mana
-        /// </summary>
-        public double Cast()
-        {
-            double tempDamage = Mana / 2;
-            ManaLoss += Mana / 2;
-            Magic += 1;
-            MaxMana = Magic * PermanentMagic * 10;
-            Mana = MaxMana - ManaLoss;
-            return tempDamage;
         }
 
         #endregion

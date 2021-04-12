@@ -21,7 +21,6 @@ namespace TBQuestGame_Hosler.DataLayer
                 Vitality = 1,
                 Magic = 1,
                 LocationId = 0,
-                Tier = 0,
                 Damage = 1,
                 Armor = 1,
                 HPLoss = 0,
@@ -38,11 +37,14 @@ namespace TBQuestGame_Hosler.DataLayer
             };
         }
 
-        private static GameItem GameItemById(int id)
+        public static GameItem GameItemById(int id)
         {
             return StandardGameItems().FirstOrDefault(i => i.Id == id);
         }
-
+        private static Npc NpcById(int id)
+        {
+            return Npcs().FirstOrDefault(i => i.Id == id);
+        }
         public static GameMapCoordinates InitialGameMapLocation()
         {
             return new GameMapCoordinates() { Row = 0, Column = 0, Floor = 0 };
@@ -181,12 +183,14 @@ namespace TBQuestGame_Hosler.DataLayer
             };
             gameMap.MapLocations[1, 2, 1] = new Location()
             {
-                Id = 160,
+                Id = 16,
                 Name = "Fight",
-                Description = "Insert generic enemy here later",
-                Message = "You feel like the dev didn't add the enemy here like he was supposed to. In fact, this message was copy pasted! Have some damage, on the house.",
-                ModifyHealth = 50,
-
+                Description = "Enemy",
+                Message = "You see a monster that looks so bland you want to put it out of your misery.",
+                Npcs = new ObservableCollection<Npc>
+                {
+                    NpcById(1001)
+                },
             };
             gameMap.MapLocations[2, 0, 1] = new Location()
             {
@@ -214,30 +218,225 @@ namespace TBQuestGame_Hosler.DataLayer
                 ModifyHealth = -2,
                 ModifyMana = -2
             };
+
+            // Third Floor
+            gameMap.MapLocations[0, 0, 2] = new Location()
+            {
+                Id = 21,
+                Name = "Fight",
+                Description = "Enemy",
+                Message = "You see a skeleton. You thought it was underwerwhelming until it started dancing to... something?",
+                Npcs = new ObservableCollection<Npc>
+                {
+                    NpcById(1002)
+                },
+            };
+            gameMap.MapLocations[0, 1, 2] = new Location()
+            {
+                Id = 22,
+                Name = "Fight",
+                Description = "Enemy",
+                Message = "As soon as you enter, a man starts shouting in what you think is supposed to be an old version of common.",
+                Npcs = new ObservableCollection<Npc>
+                {
+                    NpcById(1003)
+                },
+            };
+            gameMap.MapLocations[0, 2, 2] = new Location()
+            {
+                Id = 23,
+                Name = "Weather Room",
+                Description = "A room that changes climate.",
+                Message = "The temperature here fluctuates every minute, from blistering heat to biting cold.",
+                ModifyHealth = 20,
+                ModifyVitality = 1
+            };
+            gameMap.MapLocations[1, 0, 2] = new Location()
+            {
+                Id = 24,
+                Name = "Mana Pool",
+                Description = "When you enter you feel that you are surrounded by mana",
+                Message = "You enter a room and feel magic in the air. You eat it all, and only kind of regret it afterwards. You're not sure how you ate it though.",
+                ModifyMagic = 1,
+                ModifyMana = -20
+            };
+            gameMap.MapLocations[1, 1, 2] = new Location()
+            {
+                Id = 25,
+                Name = "Flying blades",
+                Description = "Trapped weapons room",
+                Message = "You enter the room, and suddenly a bunch of weapons fly at you! Fortunately, you dodge most of the pointy ones.",
+                ModifyAgility = 1,
+                ModifyHealth = 20
+            };
+            gameMap.MapLocations[1, 2, 2] = new Location()
+            {
+                Id = 26,
+                Name = "Fight",
+                Description = "Enemy",
+                Message = "You are blinded by snow for a few seconds, then it collates into a very angry looking blue person.",
+                Npcs = new ObservableCollection<Npc>
+                {
+                    NpcById(1004)
+                },
+            };
+            gameMap.MapLocations[2, 0, 2] = new Location()
+            {
+                Id = 27,
+                Name = "Healing Pool",
+                Description = "A magical pool that closes wounds it touches.",
+                Message = "Good things it's more than a healing mist, because wouldn't cut it.",
+                ModifyHealth = -20,
+                ModifyVitality = 1
+            };
+            gameMap.MapLocations[2, 1, 2] = new Location()
+            {
+                Id = 28,
+                Name = "Mana Pool",
+                Description = "When you enter you feel that you are surrounded by mana",
+                Message = "You enter a room and feel magic in the air. You eat it all, and only kind of regret it afterwards. You're not sure how you ate it though.",
+                ModifyMagic = 1,
+                ModifyMana = -20
+            };
+            gameMap.MapLocations[2, 2, 2] = new Location()
+            {
+                Id = 29,
+                Name = "Healing Pool",
+                Description = "A magical pool that closes wounds it touches.",
+                Message = "Good things it's more than a healing mist, because wouldn't cut it.",
+                ModifyHealth = -20,
+                ModifyVitality = 1
+            };
             return gameMap;
         }
-
         public static List<GameItem> StandardGameItems()
         {
             return new List<GameItem>()
             {
-                new Weapon(1000, "Fist", 1, "Jab, Cross, Hook, Uppercut."),
+                new Weapon(1000, "Fist", 1, "Jab, Cross, Hook, Uppercut"),
                 new Weapon(1001, "Dagger", 2, "Cheese not included"),
-                new Weapon(1002, "Club", 4, "Slightly sturdier stick."),
-                new Weapon(1003, "Great Club", 6, "You got suckered into buying a REALLY big stick"),
-                new Weapon(1004, "Short Spear", 5, "Spear is a generous term here."),
+                new Weapon(1002, "Club", 4, "Slightly sturdier stick"),
+                new Weapon(1003, "Short Spear", 5, "Spear is a generous term here"),
+                new Weapon(1004, "Great Club", 6, "You just got suckered into buying a REALLY big stick"),
                 new Weapon(1005, "Spear", 10, "Spear is accurate here though"),
-                new Weapon(1006, "Glaive", 15, "You get a bonus shortsword with your spear!"),
-                new Weapon(1007, "Shortsword", 10, "A long dagger"),
-                new Weapon(1008, "Sword", 20, "The classic choice"),
-                new Weapon(1009, "Greatsword", 30, "I also call this a giant **** off sword"),
+                new Weapon(1006, "Shortsword", 12, "A long dagger"),
+                new Weapon(1007, "Sword", 15, "The classic choice"),
+                new Weapon(1008, "Glaive", 20, "You got a bonus shortsword with your spear!"),
+                new Weapon(1009, "Greatsword", 30, "Used for delivering messages of a certain type"),
                 new Armor(2000, "Clothes", 1, "The clothes on your back"),
                 new Armor(2001, "Hide", 5, "That wasn't a command"),
                 new Armor(2002, "Chain", 15, "Because hauberks are expensive"),
-                new Armor(2003, "Scale", 10, "It'd be great if it weren't for all the gaps"),
+                new Armor(2003, "Scale", 10, "No I didn't mean scale mail, that would be wrong"),
                 new Armor(2004, "Plate", 30, "Pee flap included"),
+            };
+        }
+        public static List<Npc> Npcs()
+        {
+            return new List<Npc>()
+            {
+                new Minion()
+                {
+                    Id = 1001,
+                    Name = "Lieutenant Obvious",
+                    Description = "A being that looks so generic you're forgetting what it looks like while looking at it.",
+                    Messages = new List<string>()
+                    {
+                        "Minions unite! Or not."
+                    },
+                    SkillLevel = 2,
+                },
+                new Minion()
+                {
+                    Id = 1002,
+                    Name = "Skelly",
+                    Description = "A skeleton with a name and appearance so classic you can almost hear a certain song while it dances.",
+                    SkillLevel = 5,
+                },
+                new Minion()
+                {
+                    Id = 1003,
+                    Name = "Shakespear",
+                    Description = "An old man with a spear and no poetic talent. He might have been telling you to get off his lawn.",
+                    SkillLevel = 5,
+                },
+                new Minion()
+                {
+                    Id = 1004,
+                    Name = "Blizzard",
+                    Description = "What started as a bunch of snow in there air has collected into one pissed off blue person. You've made nature mad now.",
+                    SkillLevel = 10,
+                },
+                new Minion()
+                {
+                    Id = 1005,
+                    Name = "Foul Fowl",
+                    Description = "It says words so bad I'd lose my non-existent PG-13 rating.",
+                    SkillLevel = 10,
+                },
+                new Minion()
+                {
+                    Id = 1006,
+                    Name = "Furry",
+                    Description = "Some person wearing a horse mask. Usually you don't mind furries, but the sword is making you rethink that.",
+                    SkillLevel = 15,
+                },
+                new Minion()
+                {
+                    Id = 1007,
+                    Name = "Zombo",
+                    Description = "Some zombie with a shirt that reads, I'm with stupid =>.",
+                    SkillLevel = 15,
+                },
+                new Minion()
+                {
+                    Id = 1008,
+                    Name = "Zombotar",
+                    Description = "Some zombie with a shirt the reads, <= I'm with nerd.",
+                    SkillLevel = 23,
+                },
+                new Minion()
+                {
+                    Id = 1009,
+                    Name = "Failure",
+                    Description = "You see what must be the physical embodiment of all your failures. You don't know why you know, but the hair feels like the deciding evidence.",
+                    SkillLevel = 23,
+                },
+                new Minion()
+                {
+                    Id = 1010,
+                    Name = "Tsetse flies",
+                    Description = "Why did nature create these, and why are there so many here.",
+                    SkillLevel = 35,
+                },
+                new Minion()
+                {
+                    Id = 1011,
+                    Name = "Hellish Helen",
+                    Description = "The name's reduplication is the only pleasent thing about this demon, and you added one of the words.",
+                    SkillLevel = 35,
+                },
+                new Minion()
+                {
+                    Id = 1012,
+                    Name = "Asura",
+                    Description = "It is a normal looking person, but based on it's strength, it definitely isn't.",
+                    SkillLevel = 53,
+                },
+                new Minion()
+                {
+                    Id = 1013,
+                    Name = "Florida Man",
+                    Description = "He wears a gaudish shirt that says Florida, has a funny shaped pipe with bad smelling smoke, and a weird reptile that wants to eat you.",
+                    SkillLevel = 53,
+                },
+                new Minion()
+                {
+                    Id = 1014,
+                    Name = "The Boss",
+                    Description = "You get the sudden urge to call this man boss, but the desire to kill things outweighs that urge.",
+                    SkillLevel = 80,
+                },
             };
         }
     }
 }
-//You feel like the dev didn't add the enemy here like he was supposed to. In fact, this message was copy pasted! Have some damage, on the house
