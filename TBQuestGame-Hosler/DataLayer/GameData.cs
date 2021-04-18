@@ -54,7 +54,7 @@ namespace TBQuestGame_Hosler.DataLayer
         {
             int rows = 3;
             int columns = 3;
-            int floors = 5;
+            int floors = 6;
 
             Map gameMap = new Map(rows, columns, floors);
 
@@ -285,7 +285,7 @@ namespace TBQuestGame_Hosler.DataLayer
                 Id = 27,
                 Name = "Healing Pool",
                 Description = "A magical pool that closes wounds it touches.",
-                Message = "Good things it's more than a healing mist, because wouldn't cut it.",
+                Message = "Good thing it's more than a healing mist, because that wouldn't cut it.",
                 ModifyHealth = -20,
                 ModifyVitality = 1
             };
@@ -303,9 +303,278 @@ namespace TBQuestGame_Hosler.DataLayer
                 Id = 29,
                 Name = "Healing Pool",
                 Description = "A magical pool that closes wounds it touches.",
-                Message = "Good things it's more than a healing mist, because wouldn't cut it.",
+                Message = "Good thing it's more than a healing mist, because that wouldn't cut it.",
                 ModifyHealth = -20,
                 ModifyVitality = 1
+            };
+
+            // Fourth Floor
+            gameMap.MapLocations[0, 0, 3] = new Location()
+            {
+                Id = 31,
+                Name = "Fight",
+                Description = "Enemy",
+                Message = "You walk into the room, and see a baby horse. It turns to you, and begins saying words that shouldn't be repeated in any medium. It also wants to kick you, but that seemed like a minor point here.",
+                Npcs = new ObservableCollection<Npc>
+                {
+                    NpcById(1005)
+                },
+            };
+            gameMap.MapLocations[0, 1, 3] = new Location()
+            {
+                Id = 32,
+                Name = "Anti-gravity room",
+                Description = "Up is down",
+                Message = "As soon as you enter, you fall upwards, or maybe it's now downwards now? Fortunately, you can still reach the doors after you make sure your everything is aligned correctly.",
+                ModifyHealth = 50,
+                ModifyVitality = 1
+            };
+            gameMap.MapLocations[0, 2, 3] = new Location()
+            {
+                Id = 33,
+                Name = "Exploding runes",
+                Description = "They prepared exploding runes today.",
+                Message = "You see some paper on the walls with some words you can't read. Wait, you can read this one! 'I prepared exploding runes today'. Oh shiii",
+                ModifyHealth = 50,
+                ModifyVitality = 1
+            };
+            gameMap.MapLocations[1, 0, 3] = new Location()
+            {
+                Id = 34,
+                Name = "Fight",
+                Description = "Enemy",
+                Message = "You see a man in a horse mask holding a long, thin blade. He's wearing the rest of the costume too...",
+                Npcs = new ObservableCollection<Npc>
+                {
+                    NpcById(1006)
+                },
+            };
+            gameMap.MapLocations[1, 1, 3] = new Location()
+            {
+                Id = 35,
+                Name = "Healing Pool",
+                Description = "A magical pool that closes wounds it touches.",
+                Message = "Good thing it's more than a healing mist, because that wouldn't cut it.",
+                ModifyHealth = -20,
+                ModifyVitality = 1
+            };
+            gameMap.MapLocations[1, 2, 3] = new Location()
+            {
+                Id = 36,
+                Name = "Fight",
+                Description = "Enemy",
+                Message = "You see a zombie with a strange shirt. Kind of boring really.",
+                Npcs = new ObservableCollection<Npc>
+                {
+                    NpcById(1007)
+                },
+            };
+            gameMap.MapLocations[2, 0, 3] = new Location()
+            {
+                Id = 37,
+                Name = "Fight",
+                Description = "Enemy",
+                Message = "You see a zombie with a strange shirt. Kind of boring really.",
+                Npcs = new ObservableCollection<Npc>
+                {
+                    NpcById(1008)
+                },
+            };
+            gameMap.MapLocations[2, 1, 3] = new Location()
+            {
+                Id = 38,
+                Name = "Mana Pool",
+                Description = "When you enter you feel that you are surrounded by mana",
+                Message = "You enter a room and feel magic in the air. You eat it all, and only kind of regret it afterwards. You're not sure how you ate it though.",
+                ModifyMagic = 1,
+                ModifyMana = -20
+            };
+            gameMap.MapLocations[2, 2, 3] = new Location()
+            {
+                Id = 39,
+                Name = "Healing Pool",
+                Description = "A magical pool that closes wounds it touches.",
+                Message = "Good thing it's more than a healing mist, because wouldn't cut it.",
+                ModifyHealth = -20,
+                ModifyVitality = 1
+            };
+
+            // Fifth floor
+            gameMap.MapLocations[0, 0, 4] = new Location()
+            {
+                Id = 41,
+                Name = "Healing Pool",
+                Description = "A magical pool that closes wounds it touches.",
+                Message = "Good thing it's more than a healing mist, because wouldn't cut it.",
+                ModifyHealth = -20,
+                ModifyVitality = 1
+            };
+            gameMap.MapLocations[0, 1, 4] = new Location()
+            {
+                Id = 42,
+                Name = "Mana Pool",
+                Description = "When you enter you feel that you are surrounded by mana",
+                Message = "You enter a room and feel magic in the air. You eat it all, and only kind of regret it afterwards. You're not sure how you ate it though.",
+                ModifyMagic = 1,
+                ModifyMana = -20
+            };
+            gameMap.MapLocations[0, 2, 4] = new Location()
+            {
+                Id = 43,
+                Name = "Fight",
+                Description = "Enemy",
+                Message = "You enter the room, and see a being that makes you feel a lot of shame for some reason. It might be the bad hair choice.",
+                Npcs = new ObservableCollection<Npc>
+                {
+                    NpcById(1009)
+                },
+            };
+            gameMap.MapLocations[1, 0, 4] = new Location()
+            {
+                Id = 34,
+                Name = "Fight",
+                Description = "Enemy",
+                Message = "You see a ball of flies. Based on what you've seen so far, they definitely aren't normal.",
+                Npcs = new ObservableCollection<Npc>
+                {
+                    NpcById(1010)
+                },
+            };
+            gameMap.MapLocations[1, 1, 4] = new Location()
+            {
+                Id = 35,
+                Name = "Healing Pool",
+                Description = "A magical pool that closes wounds it touches.",
+                Message = "Good thing it's more than a healing mist, because that wouldn't cut it.",
+                ModifyHealth = -20,
+                ModifyVitality = 1
+            };
+            gameMap.MapLocations[1, 2, 4] = new Location()
+            {
+                Id = 36,
+                Name = "Fight",
+                Description = "Enemy",
+                Message = "You enter the room, and are immediately yelled at by some demon for your shirt choice. You decide to call her Helen.",
+                Npcs = new ObservableCollection<Npc>
+                {
+                    NpcById(1011)
+                },
+            };
+            gameMap.MapLocations[2, 0, 4] = new Location()
+            {
+                Id = 37,
+                Name = "Fight",
+                Description = "Enemy",
+                Message = "You see a normal looking person, then he rips a chunk of floor out of the ground and throws it at you. You barely dodged it.",
+                Npcs = new ObservableCollection<Npc>
+                {
+                    NpcById(1012)
+                },
+            };
+            gameMap.MapLocations[2, 1, 4] = new Location()
+            {
+                Id = 38,
+                Name = "Fight",
+                Description = "Enemy",
+                Message = "You enter the room, and chaos ensues. You're not sure what that man is wearing, or what that giant flat reptile is, but it you already don't like where this is going.",
+                Npcs = new ObservableCollection<Npc>
+                {
+                    NpcById(1013)
+                },
+            };
+            gameMap.MapLocations[2, 2, 4] = new Location()
+            {
+                Id = 39,
+                Name = "Healing Pool",
+                Description = "A magical pool that closes wounds it touches.",
+                Message = "Good thing it's more than a healing mist, because wouldn't cut it.",
+                ModifyHealth = -20,
+                ModifyVitality = 1
+            };
+
+            // Sixth floor
+            gameMap.MapLocations[0, 0, 5] = new Location()
+            {
+                Id = 51,
+                Name = "Healing Pool",
+                Description = "A magical pool that closes wounds it touches.",
+                Message = "Good thing it's more than a healing mist, because wouldn't cut it.",
+                ModifyHealth = -20,
+                ModifyVitality = 1
+            };
+            gameMap.MapLocations[0, 1, 5] = new Location()
+            {
+                Id = 52,
+                Name = "Mana Pool",
+                Description = "When you enter you feel that you are surrounded by mana",
+                Message = "You enter a room and feel magic in the air. You eat it all, and only kind of regret it afterwards. You're not sure how you ate it though.",
+                ModifyMagic = 1,
+                ModifyMana = -20
+            };
+            gameMap.MapLocations[0, 2, 5] = new Location()
+            {
+                Id = 53,
+                Name = "Healing Pool",
+                Description = "A magical pool that closes wounds it touches.",
+                Message = "Good thing it's more than a healing mist, because wouldn't cut it.",
+                ModifyHealth = -20,
+                ModifyVitality = 1
+            };
+            gameMap.MapLocations[1, 0, 5] = new Location()
+            {
+                Id = 54,
+                Name = "Mana Pool",
+                Description = "When you enter you feel that you are surrounded by mana",
+                Message = "You enter a room and feel magic in the air. You eat it all, and only kind of regret it afterwards. You're not sure how you ate it though.",
+                ModifyMagic = 1,
+                ModifyMana = -20
+            };
+            gameMap.MapLocations[1, 1, 5] = new Location()
+            {
+                Id = 55,
+                Name = "Boss",
+                Description = "Probably the last enemy.",
+                Message = "This is probably the boss of the tower. The surrounding rooms will heal you",
+                Npcs = new ObservableCollection<Npc>
+                {
+                    NpcById(1014)
+                },
+            };
+            gameMap.MapLocations[1, 2, 5] = new Location()
+            {
+                Id = 56,
+                Name = "Healing Pool",
+                Description = "A magical pool that closes wounds it touches.",
+                Message = "Good thing it's more than a healing mist, because wouldn't cut it.",
+                ModifyHealth = -20,
+                ModifyVitality = 1
+            };
+            gameMap.MapLocations[2, 0, 5] = new Location()
+            {
+                Id = 57,
+                Name = "Mana Pool",
+                Description = "When you enter you feel that you are surrounded by mana",
+                Message = "You enter a room and feel magic in the air. You eat it all, and only kind of regret it afterwards. You're not sure how you ate it though.",
+                ModifyMagic = 1,
+                ModifyMana = -20
+            };
+            gameMap.MapLocations[2, 1, 5] = new Location()
+            {
+                Id = 58,
+                Name = "Healing Pool",
+                Description = "A magical pool that closes wounds it touches.",
+                Message = "Good thing it's more than a healing mist, because wouldn't cut it.",
+                ModifyHealth = -20,
+                ModifyVitality = 1
+            };
+            gameMap.MapLocations[2, 2, 5] = new Location()
+            {
+                Id = 59,
+                Name = "Mana Pool",
+                Description = "When you enter you feel that you are surrounded by mana",
+                Message = "You enter a room and feel magic in the air. You eat it all, and only kind of regret it afterwards. You're not sure how you ate it though.",
+                ModifyMagic = 1,
+                ModifyMana = -20
             };
             return gameMap;
         }

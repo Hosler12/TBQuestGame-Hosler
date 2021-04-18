@@ -172,7 +172,7 @@ namespace TBQuestGame_Hosler.Models
         }
         public double Armor
         {
-            get { return Agility * PermanentAgility * Inventory[1].Bonus; }
+            get { return Agility * PermanentAgility + Inventory[1].Bonus; }
             set
             {
                 _armor = value;
@@ -181,7 +181,7 @@ namespace TBQuestGame_Hosler.Models
         }
         public double Damage
         {
-            get { return Strength * PermanentStrength * Inventory[0].Bonus; }
+            get { return Strength * PermanentStrength + Inventory[0].Bonus; }
             set
             {
                 _damage = value;
@@ -256,7 +256,7 @@ namespace TBQuestGame_Hosler.Models
         {
             double tempDamage = Damage;
             Strength += 1;
-            Damage = Strength * PermanentStrength * Inventory[0].Bonus;
+            Damage = Strength * PermanentStrength + Inventory[0].Bonus;
             return tempDamage;
         }
 

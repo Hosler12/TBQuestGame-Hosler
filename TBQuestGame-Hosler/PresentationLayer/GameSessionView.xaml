@@ -99,14 +99,14 @@
             <Grid
                 Margin="10">
                 <Grid.RowDefinitions>
-                    <RowDefinition Height="3*"/>
-                    <RowDefinition Height="1*"/>
-                    <RowDefinition Height="1*"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="70"/>
+                    <RowDefinition Height="90"/>
                 </Grid.RowDefinitions>
                 <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="*"/>
-                    <ColumnDefinition Width="*"/>
-                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="185"/>
+                    <ColumnDefinition Width="150"/>
+                    <ColumnDefinition Width="170"/>
                     <ColumnDefinition Width="*"/>
                 </Grid.ColumnDefinitions>
                 <Border
@@ -391,11 +391,18 @@
                     Grid.Column="3"
                     Margin="0,0,0,10"
                     Style="{StaticResource BorderStyle}">
-                    <Label 
-                        Content="Story"
-                        VerticalAlignment="Top"
-                        HorizontalAlignment="Center"
-                        Style="{StaticResource MainPanelLabelStyle}"/>
+                    <TextBox
+                        Height="auto"
+                        Width="auto"
+                        Margin="10"
+                        Background="WhiteSmoke"
+                        BorderThickness="0"
+                        TextWrapping="Wrap"
+                        Text="{Binding StoryInformation, Mode=OneWay}"
+                        VerticalScrollBarVisibility="Auto"
+                        VerticalContentAlignment="top"
+                        Style="{StaticResource MainPanelTextBoxStyle}" IsReadOnly="True" 
+                        VerticalAlignment="Top"/>
                 </Border>
                 <Border
                     Grid.Row="1"
