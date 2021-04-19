@@ -118,34 +118,6 @@ namespace TBQuestGame_Hosler.Models
             get { return MaxHP - HPLoss; }
             set { 
                 _health = value;
-
-                // Resets things when upon death
-
-                if (_health <= 0)
-                {
-                    HPLoss = 0;
-                    ManaLoss = 0;
-                    PermanentStrength += _strength * .1;
-                    PermanentAgility += _agility * .1;
-                    PermanentVitality += _vitality * .1;
-                    PermanentMagic += _magic * .1;
-                    Strength = 1;
-                    Agility = 1;
-                    Vitality = 1;
-                    Magic = 1;
-                    Damage = Strength * PermanentStrength;
-                    Armor = Agility * PermanentAgility;
-                    MaxHP = Vitality * PermanentVitality * 10;
-                    Health = MaxHP - HPLoss;
-                    MaxMana = Magic * PermanentMagic * 10;
-                    Mana = MaxMana - ManaLoss;
-                    LocationsVisited.Clear();
-                    Map._currentLocationCoordinates.Row = 0;
-                    Map._currentLocationCoordinates.Column = 0;
-                    Map._currentLocationCoordinates.Floor = 0;
-                    Inventory[0] = GameData.GameItemById(1000);
-                    Inventory[1] = GameData.GameItemById(2000);
-                }
                 OnPropertyChanged(nameof(Health));
             }
         }

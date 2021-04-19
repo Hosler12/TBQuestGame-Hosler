@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:TBQuestGame_Hosler.PresentationLayer"
         mc:Ignorable="d"
-        Title="GameSessionView" Height="450" Width="800">
+        Title="GameSessionView" Height="500" Width="1000">
     <Window.Resources>
         <LinearGradientBrush 
             x:Key="GrayBlueGradientBrush" 
@@ -443,7 +443,7 @@
                                 Background="WhiteSmoke"
                                 BorderThickness="0"
                                 TextWrapping="Wrap"
-                                Text="{Binding CurrentLocationInformation, Mode=OneWay}"
+                                Text="{Binding CurrentLocation.Npcs[0].Name, Mode=OneWay}"
                                 VerticalScrollBarVisibility="Auto"
                                 VerticalContentAlignment="top"
                                 Style="{StaticResource MainPanelTextBoxStyle}" IsReadOnly="True" />
@@ -466,7 +466,7 @@
                                 Background="WhiteSmoke"
                                 BorderThickness="0"
                                 TextWrapping="Wrap"
-                                Text="{Binding CurrentLocation.Npcs[0].Name, Mode=OneWay}"
+                                Text="{Binding CurrentLocationInformation, Mode=OneWay}"
                                 VerticalScrollBarVisibility="Auto"
                                 VerticalContentAlignment="top"
                                 Style="{StaticResource MainPanelTextBoxStyle}" IsReadOnly="True" />

@@ -63,8 +63,8 @@ namespace TBQuestGame_Hosler.DataLayer
             {
                 Id = 1,
                 Name = "Entrance",
-                Description = "Tower Entrance",
-                Message = "An eerie silence deafens you as the door slides shut behind you. You can go up a floor whenever you're ready.",
+                Description = "Tower entrance",
+                Message = "An eerie silence deafens you as the door slides shut behind you.",
             };
             gameMap.MapLocations[0, 1, 0] = new Location()
             {
@@ -79,7 +79,7 @@ namespace TBQuestGame_Hosler.DataLayer
             {
                 Id = 3,
                 Name = "Healing Mist",
-                Description = "A magical mist that closes wounds it touches.",
+                Description = "Healing mist",
                 Message = "You open the door, and purple mist flows over you. It may heal your body, but it can't heal a wounded heart.",
                 ModifyHealth = -2,
                 ModifyVitality = 1
@@ -89,14 +89,14 @@ namespace TBQuestGame_Hosler.DataLayer
                 Id = 4,
                 Name = "Void",
                 Description = "Calm in the storm",
-                Message = "You enter a room with blank walls, floors, and doors. Just to be sure, you check the ceiling. Blank",
+                Message = "You enter a room with blank walls, floors, and doors. Just to be sure, you check the ceiling. Blank.",
                 ModifyMagic = 1
             };
             gameMap.MapLocations[1, 1, 0] = new Location()
             {
                 Id = 5,
                 Name = "Blockade",
-                Description = "The doors have been blocked",
+                Description = "Blocked doors",
                 Message = "You need to push a lot to get this door open. Inside, you find furniture blocking the doors. Not for long.",
                 ModifyStrength = 1,
 
@@ -105,7 +105,7 @@ namespace TBQuestGame_Hosler.DataLayer
             {
                 Id = 6,
                 Name = "Siphon",
-                Description = "Mana is drained in here",
+                Description = "Mana drain",
                 Message = "You feel yourself lose energy. You decide that staying to find out what happened to it would probably be a bad idea.",
                 ModifyMana = 1,
 
@@ -115,7 +115,7 @@ namespace TBQuestGame_Hosler.DataLayer
                 Id = 7,
                 Name = "Trap",
                 Description = "Sudden arrow",
-                Message = "You open the door, and an arrow embeds itself into your kidney. That's why we have two",
+                Message = "You open the door, and an arrow embeds itself into your kidney. That's why we have two.",
                 ModifyHealth = 2,
                 ModifyAgility = 1
             };
@@ -124,7 +124,7 @@ namespace TBQuestGame_Hosler.DataLayer
                 Id = 8,
                 Name = "Void",
                 Description = "Calm in the storm",
-                Message = "You enter a room with blank walls, floors, and doors. Just to be sure, you check the ceiling. Blank",
+                Message = "You enter a room with blank walls, floors, and doors. Just to be sure, you check the ceiling. Blank.",
                 ModifyMagic = 1
             };
             gameMap.MapLocations[2, 2, 0] = new Location()
@@ -142,7 +142,7 @@ namespace TBQuestGame_Hosler.DataLayer
             {
                 Id = 11,
                 Name = "Bubbles",
-                Description = "Chaotic bubles",
+                Description = "Chaotic bubbles",
                 Message = "You enter the room, and a bunch of colorful bubbles pop when you run into them. It hurts, so something's probably not right here.",
                 ModifyHealth = 4,
                 ModifyAgility = 1
@@ -160,7 +160,7 @@ namespace TBQuestGame_Hosler.DataLayer
             {
                 Id = 13,
                 Name = "Healing Mist",
-                Description = "A magical mist that closes wounds it touches.",
+                Description = "Healing mist",
                 Message = "You open the door, and purple mist flows over you. It may heal your body, but it can't heal a wounded heart.",
                 ModifyHealth = -2,
                 ModifyVitality = 1
@@ -170,7 +170,7 @@ namespace TBQuestGame_Hosler.DataLayer
                 Id = 14,
                 Name = "Void",
                 Description = "Calm in the storm",
-                Message = "You enter a room with blank walls, floors, and doors. Just to be sure, you check the ceiling. Blank",
+                Message = "You enter a room with blank walls, floors, and doors. Just to be sure, you check the ceiling. Blank.",
                 ModifyMagic = 1
             };
             gameMap.MapLocations[1, 1, 1] = new Location()
@@ -197,7 +197,7 @@ namespace TBQuestGame_Hosler.DataLayer
                 Id = 17,
                 Name = "Pool",
                 Description = "Makeshift moat",
-                Message = "You open the door, take a step, and fall into some water. YOUR DROWNING! Oh wait, it's only knee deep, false alarm. You cough up some water, and thank the divines nobody witnessed that. Hopefully.",
+                Message = "You open the door, take a step, and fall into some water. YOU'RE DROWNING! Oh wait, it's only knee deep, false alarm. You cough up some water, and thank the divines nobody witnessed that. Hopefully.",
                 ModifyHealth = 2,
                 ModifyStrength = 1
             };
@@ -213,7 +213,7 @@ namespace TBQuestGame_Hosler.DataLayer
             {
                 Id = 19,
                 Name = "Camp",
-                Description = "Restore life",
+                Description = "Camp",
                 Message = "You feel like this is the perfect room to rest in for a while.",
                 ModifyHealth = -2,
                 ModifyMana = -2
@@ -246,7 +246,7 @@ namespace TBQuestGame_Hosler.DataLayer
             {
                 Id = 23,
                 Name = "Weather Room",
-                Description = "A room that changes climate.",
+                Description = "Weather room",
                 Message = "The temperature here fluctuates every minute, from blistering heat to biting cold.",
                 ModifyHealth = 20,
                 ModifyVitality = 1
@@ -255,7 +255,7 @@ namespace TBQuestGame_Hosler.DataLayer
             {
                 Id = 24,
                 Name = "Mana Pool",
-                Description = "When you enter you feel that you are surrounded by mana",
+                Description = "Mana pool",
                 Message = "You enter a room and feel magic in the air. You eat it all, and only kind of regret it afterwards. You're not sure how you ate it though.",
                 ModifyMagic = 1,
                 ModifyMana = -20
@@ -284,7 +284,7 @@ namespace TBQuestGame_Hosler.DataLayer
             {
                 Id = 27,
                 Name = "Healing Pool",
-                Description = "A magical pool that closes wounds it touches.",
+                Description = "Health pool",
                 Message = "Good thing it's more than a healing mist, because that wouldn't cut it.",
                 ModifyHealth = -20,
                 ModifyVitality = 1
@@ -293,7 +293,7 @@ namespace TBQuestGame_Hosler.DataLayer
             {
                 Id = 28,
                 Name = "Mana Pool",
-                Description = "When you enter you feel that you are surrounded by mana",
+                Description = "Mana pool",
                 Message = "You enter a room and feel magic in the air. You eat it all, and only kind of regret it afterwards. You're not sure how you ate it though.",
                 ModifyMagic = 1,
                 ModifyMana = -20
@@ -302,7 +302,7 @@ namespace TBQuestGame_Hosler.DataLayer
             {
                 Id = 29,
                 Name = "Healing Pool",
-                Description = "A magical pool that closes wounds it touches.",
+                Description = "Health pool",
                 Message = "Good thing it's more than a healing mist, because that wouldn't cut it.",
                 ModifyHealth = -20,
                 ModifyVitality = 1
@@ -333,8 +333,8 @@ namespace TBQuestGame_Hosler.DataLayer
             {
                 Id = 33,
                 Name = "Exploding runes",
-                Description = "They prepared exploding runes today.",
-                Message = "You see some paper on the walls with some words you can't read. Wait, you can read this one! 'I prepared exploding runes today'. Oh shiii",
+                Description = "Exploding runes",
+                Message = "You see some paper on the walls with some words you can't read. Wait, you can read this one! 'I prepared exploding runes today'. Oh shiii.",
                 ModifyHealth = 50,
                 ModifyVitality = 1
             };
@@ -353,7 +353,7 @@ namespace TBQuestGame_Hosler.DataLayer
             {
                 Id = 35,
                 Name = "Healing Pool",
-                Description = "A magical pool that closes wounds it touches.",
+                Description = "Health pool",
                 Message = "Good thing it's more than a healing mist, because that wouldn't cut it.",
                 ModifyHealth = -20,
                 ModifyVitality = 1
@@ -384,7 +384,7 @@ namespace TBQuestGame_Hosler.DataLayer
             {
                 Id = 38,
                 Name = "Mana Pool",
-                Description = "When you enter you feel that you are surrounded by mana",
+                Description = "Mana pool",
                 Message = "You enter a room and feel magic in the air. You eat it all, and only kind of regret it afterwards. You're not sure how you ate it though.",
                 ModifyMagic = 1,
                 ModifyMana = -20
@@ -393,7 +393,7 @@ namespace TBQuestGame_Hosler.DataLayer
             {
                 Id = 39,
                 Name = "Healing Pool",
-                Description = "A magical pool that closes wounds it touches.",
+                Description = "Health pool",
                 Message = "Good thing it's more than a healing mist, because wouldn't cut it.",
                 ModifyHealth = -20,
                 ModifyVitality = 1
@@ -404,7 +404,7 @@ namespace TBQuestGame_Hosler.DataLayer
             {
                 Id = 41,
                 Name = "Healing Pool",
-                Description = "A magical pool that closes wounds it touches.",
+                Description = "Health pool",
                 Message = "Good thing it's more than a healing mist, because wouldn't cut it.",
                 ModifyHealth = -20,
                 ModifyVitality = 1
@@ -413,7 +413,7 @@ namespace TBQuestGame_Hosler.DataLayer
             {
                 Id = 42,
                 Name = "Mana Pool",
-                Description = "When you enter you feel that you are surrounded by mana",
+                Description = "Mana pool",
                 Message = "You enter a room and feel magic in the air. You eat it all, and only kind of regret it afterwards. You're not sure how you ate it though.",
                 ModifyMagic = 1,
                 ModifyMana = -20
@@ -444,7 +444,7 @@ namespace TBQuestGame_Hosler.DataLayer
             {
                 Id = 35,
                 Name = "Healing Pool",
-                Description = "A magical pool that closes wounds it touches.",
+                Description = "Health pool",
                 Message = "Good thing it's more than a healing mist, because that wouldn't cut it.",
                 ModifyHealth = -20,
                 ModifyVitality = 1
@@ -486,7 +486,7 @@ namespace TBQuestGame_Hosler.DataLayer
             {
                 Id = 39,
                 Name = "Healing Pool",
-                Description = "A magical pool that closes wounds it touches.",
+                Description = "Health pool",
                 Message = "Good thing it's more than a healing mist, because wouldn't cut it.",
                 ModifyHealth = -20,
                 ModifyVitality = 1
@@ -497,7 +497,7 @@ namespace TBQuestGame_Hosler.DataLayer
             {
                 Id = 51,
                 Name = "Healing Pool",
-                Description = "A magical pool that closes wounds it touches.",
+                Description = "Health pool",
                 Message = "Good thing it's more than a healing mist, because wouldn't cut it.",
                 ModifyHealth = -20,
                 ModifyVitality = 1
@@ -506,7 +506,7 @@ namespace TBQuestGame_Hosler.DataLayer
             {
                 Id = 52,
                 Name = "Mana Pool",
-                Description = "When you enter you feel that you are surrounded by mana",
+                Description = "Mana pool",
                 Message = "You enter a room and feel magic in the air. You eat it all, and only kind of regret it afterwards. You're not sure how you ate it though.",
                 ModifyMagic = 1,
                 ModifyMana = -20
@@ -515,7 +515,7 @@ namespace TBQuestGame_Hosler.DataLayer
             {
                 Id = 53,
                 Name = "Healing Pool",
-                Description = "A magical pool that closes wounds it touches.",
+                Description = "Health pool",
                 Message = "Good thing it's more than a healing mist, because wouldn't cut it.",
                 ModifyHealth = -20,
                 ModifyVitality = 1
@@ -524,7 +524,7 @@ namespace TBQuestGame_Hosler.DataLayer
             {
                 Id = 54,
                 Name = "Mana Pool",
-                Description = "When you enter you feel that you are surrounded by mana",
+                Description = "Mana pool",
                 Message = "You enter a room and feel magic in the air. You eat it all, and only kind of regret it afterwards. You're not sure how you ate it though.",
                 ModifyMagic = 1,
                 ModifyMana = -20
@@ -534,7 +534,7 @@ namespace TBQuestGame_Hosler.DataLayer
                 Id = 55,
                 Name = "Boss",
                 Description = "Probably the last enemy.",
-                Message = "This is probably the boss of the tower. The surrounding rooms will heal you",
+                Message = "This is probably the boss of the tower. The surrounding rooms will heal you.",
                 Npcs = new ObservableCollection<Npc>
                 {
                     NpcById(1014)
@@ -544,7 +544,7 @@ namespace TBQuestGame_Hosler.DataLayer
             {
                 Id = 56,
                 Name = "Healing Pool",
-                Description = "A magical pool that closes wounds it touches.",
+                Description = "Health pool",
                 Message = "Good thing it's more than a healing mist, because wouldn't cut it.",
                 ModifyHealth = -20,
                 ModifyVitality = 1
@@ -553,7 +553,7 @@ namespace TBQuestGame_Hosler.DataLayer
             {
                 Id = 57,
                 Name = "Mana Pool",
-                Description = "When you enter you feel that you are surrounded by mana",
+                Description = "Mana pool",
                 Message = "You enter a room and feel magic in the air. You eat it all, and only kind of regret it afterwards. You're not sure how you ate it though.",
                 ModifyMagic = 1,
                 ModifyMana = -20
@@ -562,7 +562,7 @@ namespace TBQuestGame_Hosler.DataLayer
             {
                 Id = 58,
                 Name = "Healing Pool",
-                Description = "A magical pool that closes wounds it touches.",
+                Description = "Health pool",
                 Message = "Good thing it's more than a healing mist, because wouldn't cut it.",
                 ModifyHealth = -20,
                 ModifyVitality = 1
@@ -571,7 +571,7 @@ namespace TBQuestGame_Hosler.DataLayer
             {
                 Id = 59,
                 Name = "Mana Pool",
-                Description = "When you enter you feel that you are surrounded by mana",
+                Description = "Mana pool",
                 Message = "You enter a room and feel magic in the air. You eat it all, and only kind of regret it afterwards. You're not sure how you ate it though.",
                 ModifyMagic = 1,
                 ModifyMana = -20
@@ -594,9 +594,9 @@ namespace TBQuestGame_Hosler.DataLayer
                 new Weapon(1009, "Greatsword", 30, "Used for delivering messages of a certain type"),
                 new Armor(2000, "Clothes", 1, "The clothes on your back"),
                 new Armor(2001, "Hide", 5, "That wasn't a command"),
-                new Armor(2002, "Chain", 15, "Because hauberks are expensive"),
-                new Armor(2003, "Scale", 10, "No I didn't mean scale mail, that would be wrong"),
-                new Armor(2004, "Plate", 30, "Pee flap included"),
+                new Armor(2002, "Scale", 10, "No I didn't mean scale mail, that would be wrong"),
+                new Armor(2003, "Chain", 15, "Because hauberks are expensive"),
+                new Armor(2004, "Plate", 20, "Pee flap included"),
             };
         }
         public static List<Npc> Npcs()

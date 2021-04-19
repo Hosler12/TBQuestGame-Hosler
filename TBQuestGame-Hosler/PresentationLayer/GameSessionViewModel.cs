@@ -23,7 +23,7 @@ namespace TBQuestGame_Hosler.PresentationLayer
         private Map _gameMap;
         private Location _currentLocation;
         private string _currentLocationInformation;
-        private Location _northLocation, _eastLocation, _southLocation, _westLocation, _upLocation;
+        private Location _northLocation, _eastLocation, _southLocation, _westLocation, _upLocation, _downLocation;
         private Random random = new Random();
         private string _storyInformation;
         private GameItem _currentGameItem;
@@ -128,12 +128,23 @@ namespace TBQuestGame_Hosler.PresentationLayer
                 OnPropertyChanged(nameof(HasUpLocation));
             }
         }
+        public Location DownLocation
+        {
+            get { return _upLocation; }
+            set
+            {
+                _upLocation = value;
+                OnPropertyChanged(nameof(DownLocation));
+                OnPropertyChanged(nameof(HasDownLocation));
+            }
+        }
         // Checks if location is null, if not, then it is true that it has*direction*location
         public bool HasNorthLocation { get { return NorthLocation != null; } }
         public bool HasEastLocation { get { return EastLocation != null; } }
         public bool HasSouthLocation { get { return SouthLocation != null; } }
         public bool HasWestLocation { get { return WestLocation != null; } }
         public bool HasUpLocation { get { return UpLocation != null; } }
+        public bool HasDownLocation { get { return DownLocation != null; } }
         public string MissionTimeDisplay
         {
             get { return _gameTimeDisplay; }
@@ -203,9 +214,10 @@ namespace TBQuestGame_Hosler.PresentationLayer
             _currentLocationInformation = CurrentLocation.Description;
             CurrentLocationInformation += Environment.NewLine + "Weapon: " + _player.Inventory[0].Name + " Note: " + _player.Inventory[0].Description;
             CurrentLocationInformation += Environment.NewLine + "Armor: " + _player.Inventory[1].Name + " Note: " + _player.Inventory[1].Description;
-            StoryInformation = "You open your eyes, and hear a heavy door thuds behind you, quickly followed by a loud click. A little bit of door rattling reveals it's very locked. You obvously choose to walk in here, but you can't remember why." + Environment.NewLine + 
+            StoryInformation = "Tutorial: Use the north, east, etc buttons to move, and the weapon/armor buttons to upgrade your equipment. If one of the directional buttons results in nothing, then there is nothing for you to do there. At the bottom you'll see three sections, one with a one time per run description, one with current information, and one with an npc if applicable. When in a room with an enemy, click attack or cast to attempt to kill them. The left section contains stats, which are converted to permanent stats upon death. You also lose all equipment on death. This section will contain more \"story\" after you kill an enemy." + Environment.NewLine;
+            StoryInformation += "You open your eyes, and hear a heavy door thuds behind you, quickly followed by a loud click. A little bit of door rattling reveals it's very locked. You obviously choose to walk in here, but you can't remember why." + Environment.NewLine + 
                 "You jolt back in surprise when you realize your hand and arms are glowing. You look for a weapon to scrape it off, and instead, the glowing begins shifting towards a club-like shape." + Environment.NewLine +
-                "You will it to stop and look around. Two other doors, and a glowing circle in the middle of the room. Time to explore." + Environment.NewLine;
+                "You will it to stop, and look around. Two other doors, and a glowing circle in the middle of the room. Time to explore." + Environment.NewLine;
             UpdateAvailableTravelPoints();
         }
         // Calculate available travel points
@@ -219,7 +231,7 @@ namespace TBQuestGame_Hosler.PresentationLayer
             SouthLocation = null;
             WestLocation = null;
             UpLocation = null;
-
+            DownLocation = null;
             //
             // Nearby location exists check
             //
@@ -247,6 +259,11 @@ namespace TBQuestGame_Hosler.PresentationLayer
             {
                 Location nextUpLocation = _gameMap.UpLocation();
                 UpLocation = nextUpLocation;
+            }
+            if (_gameMap.DownLocation() != null)
+            {
+                Location nextDownLocation = _gameMap.DownLocation();
+                DownLocation = nextDownLocation;
             }
         }
         /// <summary>
@@ -294,7 +311,7 @@ namespace TBQuestGame_Hosler.PresentationLayer
                     _player.Mana = _player.MaxMana - _player.ManaLoss;
                 }
                 _player.MaxHP = _player.Vitality * _player.PermanentVitality * 10;
-                _player.Health = _player.MaxHP - _player.HPLoss; // Implemeent death ViewModel, not player
+                _player.Health = _player.MaxHP - _player.HPLoss;
                 
                 // display a new message if available
                 OnPropertyChanged(nameof(MessageDisplay));
@@ -351,43 +368,65 @@ namespace TBQuestGame_Hosler.PresentationLayer
                 OnPlayerMove();
             }
         }
+        public void MoveDown()
+        {
+            if (HasDownLocation)
+            {
+                _gameMap.MoveDown();
+                CurrentLocation = _gameMap.CurrentLocation;
+                UpdateAvailableTravelPoints();
+                OnPlayerMove();
+            }
+        }
         internal void ArmorUp()
         {
             int newArmor = _player.Inventory[1].Id + 1;
-            CurrentLocationInformation = newArmor.ToString();
-            _player.Inventory.Add(GameData.GameItemById(newArmor));
-            if (_player.Inventory[2].Bonus * 2 <= _player.Mana)
+            if (GameData.GameItemById(newArmor) != null)
             {
-                _player.Inventory[1] = _player.Inventory[2];
-                CurrentLocationInformation = "You conjure a new armor successfully, and decide that wearing two armors would look dumb. Basic fasion.";
-                _player.Armor = _player.Inventory[1].Bonus + _player.Agility * _player.PermanentAgility;
-                _player.ManaLoss += _player.Inventory[1].Bonus * 2;
-                _player.Mana = _player.MaxMana - _player.ManaLoss;
+                _player.Inventory.Add(GameData.GameItemById(newArmor));
+                if (_player.Inventory[2].Bonus * 2 <= _player.Mana)
+                {
+                    _player.Inventory[1] = _player.Inventory[2];
+                    CurrentLocationInformation = "You conjure a new armor successfully, and decide that wearing two armors would look dumb. Basic fasion.";
+                    _player.Armor = _player.Inventory[1].Bonus + _player.Agility * _player.PermanentAgility;
+                    _player.ManaLoss += _player.Inventory[1].Bonus * 2;
+                    _player.Mana = _player.MaxMana - _player.ManaLoss;
+                }
+                else
+                {
+                    CurrentLocationInformation = "You try to conjure some new armor, but find your mana pool is lacking. Too bad you don't know how to block.";
+                }
+                _player.Inventory.RemoveAt(2);
             }
             else
             {
-                CurrentLocationInformation = "You try to conjure some new armor, but find your mana pool is lacking. Too bad you don't know how to block.";
+                CurrentLocationInformation = "There is no better armor. Except maybe a picture of a blobfish.";
             }
-            _player.Inventory.RemoveAt(2);
         }
         internal void WeaponUp()
         {
             int newWeapon = _player.Inventory[0].Id + 1;
-            CurrentLocationInformation = newWeapon.ToString();
-            _player.Inventory.Add(GameData.GameItemById(newWeapon));
-            if (_player.Inventory[2].Bonus <= _player.Mana)
+            if (GameData.GameItemById(newWeapon) != null)
             {
-                _player.Inventory[0] = _player.Inventory[2];
-                CurrentLocationInformation = "You conjure a new weapon successfully, and throw away the old one because you definitely won't need that later.";
-                _player.Damage = _player.Inventory[0].Bonus + _player.Strength * _player.PermanentStrength;
-                _player.ManaLoss += _player.Inventory[0].Bonus;
-                _player.Mana = _player.MaxMana - _player.ManaLoss;
+                _player.Inventory.Add(GameData.GameItemById(newWeapon));
+                if (_player.Inventory[2].Bonus <= _player.Mana)
+                {
+                    _player.Inventory[0] = _player.Inventory[2];
+                    CurrentLocationInformation = "You conjure a new weapon successfully, and throw away the old one because you definitely won't need that later.";
+                    _player.Damage = _player.Inventory[0].Bonus + _player.Strength * _player.PermanentStrength;
+                    _player.ManaLoss += _player.Inventory[0].Bonus;
+                    _player.Mana = _player.MaxMana - _player.ManaLoss;
+                }
+                else
+                {
+                    CurrentLocationInformation = "You try to conjure a new weapon, but find your mana pool is lacking. Time to hit stuff more.";
+                }
+                _player.Inventory.RemoveAt(2);
             }
             else
             {
-                CurrentLocationInformation = "You try to conjure a new weapon, but find your mana pool is lacking. Time to hit stuff more.";
+                CurrentLocationInformation = "There is no better weapon. Except a baby.";
             }
-            _player.Inventory.RemoveAt(2);
         }
         /// <summary>
         /// running time of game
@@ -466,7 +505,7 @@ namespace TBQuestGame_Hosler.PresentationLayer
                     {
                         case 1:
                             battleNpc.BattleMode = BattleModeName.ATTACK;
-                            if (battleNpc.Attack() > _player.Armor)
+                            if (battleNpc.Attack() > _player.Armor * 2)
                             {
                                 pDamageReceived = battleNpc.Attack();
                                 _player.Agility += 1;
@@ -482,7 +521,7 @@ namespace TBQuestGame_Hosler.PresentationLayer
                     _player.MaxHP = _player.Vitality * _player.PermanentVitality * 10;
                     if (eDamageReceived >= battleNpc.SkillLevel * 10)
                     {
-                        battleInformation += $"You have slain {_currentLocation.Npcs[0].Name}. " + Environment.NewLine;
+                        battleInformation += $"You have slain {npcName}. " + Environment.NewLine;
                         _currentLocation.Npcs.Remove(_currentLocation.Npcs[0]);
                         OnKill(npcName, npcDescription, playerWeapon, playerArmor);
                     }
@@ -492,8 +531,8 @@ namespace TBQuestGame_Hosler.PresentationLayer
                     }
                     if (_player.MaxHP - _player.HPLoss <= 0)
                     {
-                        //OnDeath();
-                        battleInformation += $"You have been slain by {_currentLocation.Npcs[0].Name}." + Environment.NewLine;
+                        OnDeath();
+                        battleInformation += $"You have been slain by {npcName}, then find yourself at the entrance." + Environment.NewLine;
                     }
                     // build out the text for the current location information
                     battleInformation +=
@@ -505,10 +544,38 @@ namespace TBQuestGame_Hosler.PresentationLayer
             }
         }
         #endregion
-        //private void OnDeath()
-        //{
-
-        //}
+        // Resets things when upon death
+        private void OnDeath()
+        {
+            _player.HPLoss = 0;
+            _player.ManaLoss = 0;
+            _player.PermanentStrength += _player.Strength * .1;
+            _player.PermanentAgility += _player.Agility * .1;
+            _player.PermanentVitality += _player.Vitality * .1;
+            _player.PermanentMagic += _player.Magic * .1;
+            MoveDown();
+            MoveDown();
+            MoveDown();
+            MoveDown();
+            MoveDown();
+            MoveNorth();
+            MoveNorth();
+            MoveWest();
+            MoveWest();
+            _player.Strength = 1;
+            _player.Agility = 1;
+            _player.Vitality = 1;
+            _player.Magic = 1;
+            _player.Damage = _player.Strength * _player.PermanentStrength;
+            _player.Armor = _player.Agility * _player.PermanentAgility;
+            _player.MaxHP = _player.Vitality * _player.PermanentVitality * 10;
+            _player.Health = _player.MaxHP - _player.HPLoss;
+            _player.MaxMana = _player.Magic * _player.PermanentMagic * 10;
+            _player.Mana = _player.MaxMana - _player.ManaLoss;
+            _player.LocationsVisited.Clear();
+            _player.Inventory[0] = GameData.GameItemById(1000);
+            _player.Inventory[1] = GameData.GameItemById(2000);
+        }
         private void OnKill(string npcName, string npcDescription, string playerWeapon, string playerArmor)
         {
             kills++;
@@ -522,13 +589,13 @@ namespace TBQuestGame_Hosler.PresentationLayer
                     StoryInformation += $"You hope this will become easier, because no matter how many times you can come back, this is mentally tiring." + Environment.NewLine;
                     break;
                 case 3:
-                    StoryInformation += $"It's not getting easier. {npcName} definitely won't be the strongest thing in this tower, and the more you go up, the more you worry about what is coming" + Environment.NewLine;
+                    StoryInformation += $"It's not getting easier. {npcName} definitely won't be the strongest thing in this tower, and the more you go up, the more you worry about what is coming." + Environment.NewLine;
                     break;
                 case 4:
                     StoryInformation += $"You block {npcName}'s desperate last attack. It's too bad you've learned everything you can from the previous enemies, but it feels like you had experience with fighting before the tower." + Environment.NewLine;
                     break;
                 case 5:
-                    StoryInformation += $"You decide to try to talk to {npcName}, since magical things can usually talk. You think. You must have killed it's father or something, because it ignored you" + Environment.NewLine;
+                    StoryInformation += $"You decide to try to talk to {npcName}, since magical things can usually talk. You think. You must have killed it's father or something, because it ignored you." + Environment.NewLine;
                     break;
                 case 6:
                     StoryInformation += $"Talking to this one didn't work either. It didn't chase you out of the room though, so it probably wasn't father murder. Probably." + Environment.NewLine;
@@ -546,13 +613,13 @@ namespace TBQuestGame_Hosler.PresentationLayer
                     StoryInformation += $"After you finish off {npcName}, you think one question that makes you stop. Are you a bastard? You keep moving forward at all costs, despite not being able to see the goal. Or any goal for that matter." + Environment.NewLine;
                     break;
                 case 11:
-                    StoryInformation += $"Another enemy dead, and more questions keep coming. Why do they just disappear, when you kill them. Where did you learn to summon equipment and fight? Why did you enter the tower" + Environment.NewLine;
+                    StoryInformation += $"Another enemy dead, and more questions keep coming. Why do they just disappear, when you kill them. Where did you learn to summon equipment and fight? Why did you enter the tower." + Environment.NewLine;
                     break;
                 case 12:
                     StoryInformation += $"You're done with the thinking. You don't need to know why anything is the way it is. You have a goal, and it's one that you set when you started. Explore." + Environment.NewLine;
                     break;
                 case 13:
-                    StoryInformation += $"Your task is continuing without issue now that you've focused. RIght now it's just you, your {playerWeapon}, and potentially hundreds of things to finish" + Environment.NewLine;
+                    StoryInformation += $"Your task is continuing without issue now that you've focused. RIght now it's just you, your {playerWeapon}, and potentially hundreds of things to finish." + Environment.NewLine;
                     break;
                 case 14:
                     StoryInformation += $"You kill {npcName}, and find yourself in the first room, a broken mana crystal in your hand this time. A spell gone wrong? Who cares, you have a town to protect. You don your {playerArmor} armor, summon a {playerWeapon}, and begin one last climb." + Environment.NewLine;

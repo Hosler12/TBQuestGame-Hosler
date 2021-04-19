@@ -102,6 +102,13 @@ namespace TBQuestGame_Hosler.Models
                 _currentLocationCoordinates.Floor += 1;
             }
         }
+        public void MoveDown()
+        {
+            if (_currentLocationCoordinates.Floor > 0)
+            {
+                _currentLocationCoordinates.Floor -= 1;
+            }
+        }
         // get the location if it exists
         public Location NorthLocation()
         {
@@ -206,7 +213,21 @@ namespace TBQuestGame_Hosler.Models
             }
             return upLocation;
         }
+        public Location DownLocation()
+        {
+            Location downLocation = null;
 
+            if (_currentLocationCoordinates.Floor > 0)
+            {
+                Location nextDownLocation = _mapLocations[_currentLocationCoordinates.Row, _currentLocationCoordinates.Column, _currentLocationCoordinates.Floor - 1];
+
+                if (nextDownLocation != null)
+                {
+                    downLocation = nextDownLocation;
+                }
+            }
+            return downLocation;
+        }
         #endregion
     }
 }
