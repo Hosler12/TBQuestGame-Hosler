@@ -505,7 +505,7 @@ namespace TBQuestGame_Hosler.PresentationLayer
                     {
                         case 1:
                             battleNpc.BattleMode = BattleModeName.ATTACK;
-                            if (battleNpc.Attack() > _player.Armor * 2)
+                            if (battleNpc.Attack() * 2 > _player.Armor)
                             {
                                 pDamageReceived = battleNpc.Attack();
                                 _player.Agility += 1;
